@@ -4,402 +4,495 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Prüfungstermine</title>
+    <meta name="revisit-after" content="1 days"/>
+    <meta name="robots" content="INDEX, FOLLOW"/>
+    <meta name="googlebot" content="INDEX, FOLLOW"/>
+    <meta name="rating" content="general"/>
+    <meta name="keywords" content="Startseite"/>
+    <meta name="description" content=""/>
+    <meta name="generator" content="LARISSA Smart Content Management"/>
+    <title>my.fhdw.de</title>
 
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.min.css" type="text/css"/>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#21376a">
+    <link rel="apple-touch-icon" href="img/homescreen192.png">
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/autocomplete.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/autosuggest.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/style.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/vorlage.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/fontawesome/css/all.min.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/datepicker.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap-select.min.css" type="text/css">
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.custom.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/buttons.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/infopool.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/content.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/css.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/datepicker.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/module/events/events.css" type="text/css">
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/jobs.css" type="text/css">
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/ie7.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/requestForm.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/message.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/tipsy.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/bootstrap_breadcrump.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/curriculum.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/print.css" type="text/css" media="print"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/general.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/jquery/plugins/contextMenu/jquery.contextMenu.css" type="text/css"/>
     
-    <link rel="stylesheet" href="styles/custom.css" type="text/css" media="all"/>
+    <link rel="stylesheet" href="styles/custom.css?202602012030" type="text/css" media="all"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
+    <script>
+    var IE = false;
+    </script>
     <style>
-        /* --- HARDCORE OVERRIDES DAMIT ES WIE DAS ORIGINAL AUSSIEHT --- */
-
-        /* 1. HEADER & BANNER */
-        .header-logo-box {
-            background-color: #fff;
-            padding: 0;
-            border-bottom: none;
-        }
-        /* Stellt sicher, dass das Bannerbild richtig sitzt */
-        .header-logo-box img {
-            max-height: 120px; /* Oder je nach Bildgröße anpassen */
-            width: auto;
-            max-width: 100%;
-        }
-
-        /* 2. NAVIGATION (Dunkelblau & Orange) */
-        #top-navigation.navbar-default {
-            background-color: #21376a !important; /* FHDW Dunkelblau */
-            border: none;
-            border-radius: 0;
-            margin-bottom: 20px;
-            min-height: 50px;
-        }
-        
-        /* Die Links in der Navbar */
-        #top-navigation .navbar-nav > li > a {
-            color: #ffffff !important;
-            font-weight: bold;
-            padding: 15px 20px;
-            font-size: 14px;
-        }
-
-        /* Der AKTIVE Reiter (Orange) */
-        #top-navigation .navbar-nav > li.active > a,
-        #top-navigation .navbar-nav > li.active > a:hover,
-        #top-navigation .navbar-nav > li.active > a:focus {
-            background-color: #f39200 !important; /* FHDW Orange */
-            color: #ffffff !important;
-        }
-
-        /* Hover Effekt für nicht-aktive Links */
-        #top-navigation .navbar-nav > li > a:hover {
-            background-color: #3b5a9b !important; /* Leicht helleres Blau */
-        }
-
-        /* Login/User Dropdown rechts */
-        .navbar-btn {
-            margin-top: 8px;
-            margin-bottom: 8px;
-        }
-
-        /* 3. BREADCRUMB & USER MENU LEISTE */
-        .breadcrumb-container {
-            margin-bottom: 20px;
-            padding: 0 15px;
-        }
-        .breadcrumb {
-            background: transparent;
-            padding: 8px 0;
-            margin-bottom: 0;
-            font-size: 12px;
-        }
-        .breadcrumb > li > a {
-            color: #333;
-            text-decoration: none;
-        }
-        .breadcrumb > .active {
-            color: #777;
-        }
-
-        /* 4. TABELLEN DESIGN (Exakt wie Screenshot 1) */
-        .table-original {
-            font-size: 12px;
-            border: 1px solid #ddd;
-            width: 100%;
-            background-color: #fff;
-        }
-        
-        /* Kopfzeile */
-        .table-original thead tr th {
-            background-color: #fff;
-            border-bottom: 1px solid #ddd;
-            border-right: 1px solid #ddd;
-            color: #333;
-            font-weight: bold;
-            padding: 8px;
-            vertical-align: top;
-        }
-
-        /* Tabellenzellen */
-        .table-original tbody tr td {
-            border-top: 1px solid #ddd;
-            border-right: 1px solid #ddd; /* Vertikale Linien */
-            padding: 8px;
-            vertical-align: top;
-            color: #333;
-        }
-
-        /* Die erste Spalte (Prüfung) hat spezielles Styling */
-        .col-exam-title b {
-            color: #000;
-            font-weight: bold;
-        }
-        .col-exam-name {
-            display: block;
-            margin-top: 4px;
-            color: #21376a; /* Blau */
-            font-size: 13px;
-        }
-
-        /* Button "Angemeldete Prüfungen" */
-        .btn-tab-wrapper {
-            text-align: right;
-            margin-bottom: 0; 
-            border-bottom: 1px solid #ddd;
-        }
-        .btn-tab-fake {
-            display: inline-block;
-            background-color: #eee; /* Grau hinterlegt wie im Bild */
-            border: 1px solid #ddd;
-            border-bottom: 1px solid #fff; /* Unten offen zum Content */
-            padding: 8px 15px;
-            color: #333;
-            font-size: 13px;
-            position: relative;
-            top: 1px;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-            text-decoration: none;
-        }
-        .btn-tab-fake:hover {
-            text-decoration: none;
-            color: #333;
-        }
-
-        /* Info Box Blau */
-        .alert-info-custom {
-            background-color: #d9edf7;
-            border: 1px solid #bce8f1;
-            color: #31708f;
-            padding: 15px;
-            margin-bottom: 20px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
+    .submission-chat-list-wrapper { display: none !important; }
+    .submission-chat-spinner { display: none !important; }
+    .submission-chat-list { display: none !important; }
+    #submission-chat-form { display: none !important; }
+    .pruefungsergebnisse-banner { border: 2px solid #ddd; margin-bottom: 15px; }
+    .pruefungsergebnisse-banner div { padding-top: 5px; padding-bottom: 5px; }
+    .media-body > div:nth-child(1) { font-size: 18px; color: #21376a; }
+    .date_container .date_info { padding-bottom: 50px !important; }
+    .date_info { border-left: 0px !important; border-top: 0px !important; border-bottom: 1px black solid !important; }
     </style>
-</head>
 
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/tabcontent.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/ufo.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/functions.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/FormGeneratorFileHandlerCommunity.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/js/jquery-migrate-1.4.1.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/plugins/jquery-ui-1.11.0/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/plugins/jquery.ba-bbq.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/plugins/jquery.tipsy.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/plugins/jquery.simplemodal.1.4.4.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/plugins/jquery.autoSuggest.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/plugins/jquery.numeric.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/jquery/plugins/contextMenu/jquery.contextMenu.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/jquery/plugins/jquery.tipsy.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/lottie/lottie-5.12.2.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/message.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap-filestyle.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/hugerte/vendor/hugerte.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Common/JSONUtils.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Core/AjaxHandler.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Core/AjaxResult.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Core/Class.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Core/InitializeContent.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Dialog/DialogAjaxHandler.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap-initialize.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Common/AjaxUpdateTable.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Common/AjaxPaginationTable.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Common/AjaxFilterFormTable.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Common/Components/SimoLoadingAnimationComponent.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/moment.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap-datetimepicker/js/custom-bootstrap-datetimepicker.de.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/courseAttendance.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Profile/AddressSelection.js"></script>
+
+    </head>
 <body id="community-facelift">
-
+    <div id="locale" data-locale="de-DE" hidden></div>
+    <div class="table-overlay text-center hidden simo-loading-spinner" data-simo-animation-container="simo-loading-spinner">
+        <div class="simo-table-overlay-animation-wrapper">
+            <simo-loading-animation class="simo-table-overlay-animation" height="12rem" width="12rem" data-simo-animation-container-id="simo-loading-spinner"></simo-loading-animation>
+        </div>
+    </div>
     <div id="container-spacer">
         <div class="community-facelift header-logo-box">
-            <div class="container">
-                <a href="dashboard.html">
-                    <img src="img/Community_Banner.jpg" class="img-responsive" alt="FHDW Banner"/>
+            <div class="container" style="overflow: hidden;">
+                <a title="Home" href="/">
+                    <img src="img/Community_Banner.jpg" class="img-responsive" alt="page logo" onerror="this.style.display='none'"/>
                 </a>
             </div>
         </div>
 
-        <nav id="top-navigation" class="navbar navbar-default community-facelift">
+        <nav role="navigation" id="top-navigation" class="navbar navbar-default community-facelift">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-id">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-id-5ddff3db0f75d">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="dashboard.html" class="navbar-brand" style="color:#fff;">
+                    <a href="/" class="navbar-brand">
                         <span class="glyphicon glyphicon-home"></span>
                     </a>
                 </div>
-
-                <div class="collapse navbar-collapse" id="navbar-collapse-id">
+                <div class="collapse navbar-collapse" id="navbar-collapse-id-5ddff3db0f75d">
                     <ul class="nav navbar-nav">
-                        <li><a href="profile.html">Mein Profil</a></li>
-                        <li><a href="timetable.html">Stundenplan</a></li>
-                        <li class="active"><a href="pruefungstermine.html">Prüfungstermine</a></li>
-                        <li><a href="notenuebersicht.html">Notenübersicht</a></li>
-                        <li><a href="dokumente.html">Dokumente</a></li>
-                        <li><a href="abgaben.html">Abgaben</a></li>
-                        <li><a href="kurzbewerbung.html">Kurzbewerbung Master-Studium</a></li>
                     </ul>
+                    <button id="kAGNlKwu0D" onclick="document.location = '#'; return false;" data-toggle="modal" data-target="#dialog-login-form" class="btn btn-default navbar-btn pull-right btn-primary">
+                        <span class="fa fa-unlock-alt"></span>
+                         Login
+                    </button>
                 </div>
             </div>
         </nav>
 
-        <div class="container breadcrumb-container">
+        <div class="container" style="padding-top: 15px; padding-bottom: 15px;">
             <div class="pull-right">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" style="background: #fff; border: 1px solid #ccc;">
-                        <span class="far fa-user"></span> Mehmet Güngörmez <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="index.html">Ausloggen</a></li>
-                    </ul>
+                <div style="display: block;">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img alt="Deutsch" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/system/img/flags/de.png" style="position: relative; top: -2px;">
+                             Deutsch
+                            <span class="caret"></span>
+                        </button>
+                    </div>
+
+                    <div id="language-switch-dialog" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span>×</span>
+                                    </button>
+                                    <h4 class="modal-title">
+                                        <i class="far fa-info-circle"></i>
+                                         Seite nicht gefunden
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="alert alert-info" role="alert">
+                                                <ul class="list-unstyled">
+                                                    <li>Die von Ihnen gewünschte Seite existiert in dieser Sprache nicht. Sie können alternativ auf die Startseite wechseln oder die Aktion abbrechen.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-link" data-dismiss="modal">Abbrechen</button>
+                                    <button id="home-button" class="btn btn-default btn-primary" data-dismiss="modal">
+                                        Sprache wechseln und zur Startseite
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="pull-left">
-                <div class="btn-group btn-breadcrumb">
-                    <a href="dashboard.html" class="btn btn-default btn-xs" style="border:none; background:none; padding-left:0;">Startseite</a> 
-                    <span style="color:#ccc">/</span> 
-                    <span class="btn btn-default btn-xs disabled" style="border:none; background:none; color:#777;">Prüfungstermine</span>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-
-        <div class="container">
-            
-            <div class="alert alert-info-custom">
-                Hier sehen Sie eine Liste Ihrer geplanten Prüfungen. Ihre Prüfungstermine finden Sie zudem immer in Ihrem Stundenplan.
-            </div>
-
-            <div class="btn-tab-wrapper">
-                <a href="#" class="btn-tab-fake">Angemeldete Prüfungen</a>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-bordered table-original">
-                    <thead>
-                        <tr>
-                            <th style="width: 25%">Prüfung</th>
-                            <th style="width: 12%">Datum & Zeit</th>
-                            <th style="width: 12%">Zusatz</th>
-                            <th style="width: 12%">Dozierende</th>
-                            <th style="width: 12%">Beisitzende</th>
-                            <th style="width: 10%">Raum</th>
-                            <th style="width: 17%">Prüfungsform</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="col-exam-title">
-                                <b>25.02.2026 10:45 - 13:00 Uhr</b> - noch 23 Tage
-                                <span class="col-exam-name">Praxisphase</span>
-                            </td>
-                            <td>25.02.2026<br>10:45 - 13:00</td>
-                            <td>BFWC423A</td>
-                            <td>Christian Soltenborn</td>
-                            <td>Christian Soltenborn</td>
-                            <td>B-D01</td>
-                            <td>Referat -<br>Praxisphase</td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-exam-title">
-                                <b>20.04.2026 11:00 - 12:30 Uhr</b> - noch 77 Tage
-                                <span class="col-exam-name">IT-Compliance, Prozesse und Architekturen</span>
-                            </td>
-                            <td>20.04.2026<br>11:00 - 12:30</td>
-                            <td>BFWC423A,<br>MFWC423A</td>
-                            <td>Walter Speth</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>B-D01<br>B-D05</td>
-                            <td>Klausur</td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-exam-title">
-                                <b>24.04.2026 08:30 - 10:00 Uhr</b> - noch 81 Tage
-                                <span class="col-exam-name">Wirtschaftsrecht</span>
-                            </td>
-                            <td>24.04.2026<br>08:30 - 10:00</td>
-                            <td>BFWC423A,<br>BFWS423A</td>
-                            <td>Patrick Redell</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>B-D01<br>B-D05</td>
-                            <td>Klausur</td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-exam-title">
-                                <span class="col-exam-name" style="margin-top:0">Advanced Topics in Computer Science</span>
-                            </td>
-                            <td></td>
-                            <td>BFWC423A,<br>BFWS423A</td>
-                            <td>Roland Pleger</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>Referat</td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-exam-title">
-                                <span class="col-exam-name" style="margin-top:0">Entrepreneurship</span>
-                            </td>
-                            <td></td>
-                            <td>BFWC423A,<br>BFWS423A</td>
-                            <td>Ulrike Biedendieck</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>Kombination von<br>Prüfungsformen</td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-exam-title">
-                                <span class="col-exam-name" style="margin-top:0">Implementierung digitaler Geschäftsprozesse</span>
-                            </td>
-                            <td></td>
-                            <td>BFWC423A,<br>BFWS423A</td>
-                            <td>Joachim Bloemer</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>Referat</td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-exam-title">
-                                <span class="col-exam-name" style="margin-top:0">Marketing</span>
-                            </td>
-                            <td></td>
-                            <td>BFWC423A,<br>BFWS423A</td>
-                            <td>Stefan Helmke</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>Referat</td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-exam-title">
-                                <span class="col-exam-name" style="margin-top:0">Securing Digital Transformation</span>
-                            </td>
-                            <td></td>
-                            <td>BFWC423A</td>
-                            <td>Walter Speth</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>Referat</td>
-                        </tr>
-
-                        <tr>
-                            <td class="col-exam-title">
-                                <span class="col-exam-name" style="margin-top:0">Web Technologies and Applications</span>
-                            </td>
-                            <td></td>
-                            <td>BFWC423A,<br>BFWS423A</td>
-                            <td>Patrick Kobsch</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>Nicht zugeordnet</td>
-                            <td>Referat</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div style="font-size: 12px; margin-top: 10px; color:#333;">
-                <b>1 - 9</b> von <b>9</b>, Ergebnisse pro Seite: <b>50</b> <i class="fas fa-caret-up"></i>
-            </div>
-
-            <div style="height: 60px;"></div>
-        </div>
-    </div>
-
-    <footer class="community-facelift footer-bootstrap footer-info">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-9">
-                    <p>Fachhochschule der Wirtschaft</p>
-                    <p>Paderborn | Bergisch Gladbach | Bielefeld | Marburg | Mettmann</p>
-                </div>
-                <div class="col-xs-12 col-sm-3 text-right">
-                    <a href="#">Kontakt</a> &nbsp;&nbsp;&nbsp; <a href="#">Impressum</a>
-                </div>
             </div>
         </div>
-    </footer>
-    
-    <footer class="community-facelift footer-bootstrap-academyFive footer-meta">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div id="academyFiveFooter" class="text-center">
-                        <a href="https://www.simovative.com" target="_blank">&copy; academyFIVE</a>
+
+            <h1>
+                <strong>Herzlich willkommen</strong>
+            </h1>
+            <p>&nbsp;im Portal des Campus Management Systems der FHDW.</p>
+            <p>&nbsp;</p>
+            <div>
+                <img align="left" border="0" hspace="10" src="img/homescreen192.png"/>
+                <p style="box-sizing: border-box; margin: 0px 0px 10px; color: #333333; font-family: Arial, Helvetica, sans-serif">
+                    &nbsp;
+                    <span style="box-sizing: border-box; font-weight: 700">F&uuml;r Studierende sind folgende Funktionen umgesetzt:</span>
+                    &nbsp;
+                </p>
+            </div>
+            <ul style="box-sizing: border-box; margin-top: 0px; margin-bottom: 10px; color: #333333; font-family: Arial, Helvetica, sans-serif">
+                <li style="box-sizing: border-box">
+                    <span style="box-sizing: border-box; font-weight: 700">Stundenplan:</span>
+                    &nbsp;Hier befindet sich Ihr pers&ouml;nlicher Stundenplan mit allen m&ouml;glichen 
+                    Eintr&auml;gen, wie Vorlesungen, E-Learning-Vorlesungen, Klausuren und 
+                    ggfs.Nachklausuren.
+                </li>
+                <li style="box-sizing: border-box">
+                    <span style="box-sizing: border-box; font-weight: 700">Pr&uuml;fungstermine:&nbsp;</span>
+                    Hier finden Sie Ihre individuellen Pr&uuml;fungen.
+                </li>
+                <li style="box-sizing: border-box">
+                    <span style="box-sizing: border-box; font-weight: 700">Noten&uuml;bersicht:</span>
+                    &nbsp;Hier erhalten Sie eine &Uuml;bersicht &uuml;ber Ihre erbrachten Leistungen.
+                </li>
+                <li style="box-sizing: border-box">
+                    <span style="box-sizing: border-box; font-weight: 700">Dokumente:&nbsp;</span>
+                    Hier wird Ihr aktuelles Transcript of Records und Ihre Immatrikulationsbescheinigung zur Verf&uuml;gung gestellt. 
+                </li>
+                <li style="box-sizing: border-box">
+                    <strong>Abgaben:</strong>
+                     Hier melden Sie sich f&uuml;r Abgaben  (Praxisphase, Praxisarbeit, 
+                    Bachelor-/Master-Thesis, etc.) an und geben die elektronische Version 
+                    ab. Zudem k&ouml;nnen Sie die zugeh&ouml;rigen Daten &amp; Fristen einsehen.
+                </li>
+                <li style="box-sizing: border-box">
+                    <strong>Kurzbewerbung Master-Studium: </strong>
+                    Informationen zur Kurzbewerbung f&uuml;r ein Master-Studium an der FHDW
+                </li>
+            </ul>
+            <p style="box-sizing: border-box; margin: 0px 0px 10px; color: #333333; font-family: Arial, Helvetica, sans-serif">&nbsp;</p>
+            <p style="box-sizing: border-box; margin: 0px 0px 10px; color: #333333; font-family: Arial, Helvetica, sans-serif">
+                &nbsp;
+                <span style="box-sizing: border-box; font-weight: 700">F&uuml;r Dozierende sind folgende Funktionen umgesetzt:</span>
+                .
+            </p>
+            <div style="box-sizing: border-box; color: #333333; font-family: Arial, Helvetica, sans-serif">
+                <ul style="box-sizing: border-box; margin-top: 0px; margin-bottom: 10px">
+                    <li style="box-sizing: border-box">
+                        <span style="box-sizing: border-box; font-weight: 700">Stundenplan:</span>
+                        &nbsp;Hier befindet sich der Stundenplan mit unterschiedlichen Selektionsm&ouml;glichkeiten. Zu Terminen k&ouml;nnen 
+                        Teilnehmerlisten heruntergeladen werden. (Zuerst einen Termin anklicken. 
+                        Nun erscheint links oben am Termin ein kleines Blatt. Dieses Blatt 
+                        ebenfalls anklicken. Danach erscheint der &quot;Dokument drucken&quot;-Dialog und 
+                        es k&ouml;nnen die Listen ausgew&auml;hlt werden. Die PDF-Generierung dauert einen Moment.)
+                    </li>
+                    <li style="box-sizing: border-box">
+                        <span style="box-sizing: border-box; font-weight: 700">Pr&uuml;fungen:</span>
+                        &nbsp;Hier sehen Sie eine &Uuml;bersicht aller f&uuml;r Sie geplanten Pr&uuml;fungen (Klausuren, 
+                        Nachklausuren, M&uuml;ndliche Erg&auml;nzungspr&uuml;fungen, etc.). Weiterhin geben Sie
+                         hier die Noten f&uuml;r Klausuren ein.
+                    </li>
+                    <li style="box-sizing: border-box">
+                        <strong>Dokumente: </strong>
+                        Hier k&ouml;nnen Sie sich Jahres&uuml;bersichten Ihrer Abgaben als PDF herunterladen. Zudem k&ouml;nnen Teilnehmerlisten von Vorlesungen eines ganzen Semesters generiert werden. 
+                    </li>
+                    <li style="box-sizing: border-box">
+                        <strong>Abgaben:</strong>
+                         Hier sind die Abgaben (Praxisarbeit, Bachelor-/Master-Thesis, etc.), 
+                        denen Sie als Betreuer zugordnet sind, zu finden. Die Betreuungsanfragen
+                         werden hier best&auml;tigt. Nach Abgabe der Arbeit k&ouml;nnen Sie die 
+                        elektronische Version herunterladen.&nbsp; 
+                    </li>
+                </ul>
+            </div>
+            <p style="box-sizing: border-box; margin: 0px 0px 10px; color: #333333; font-family: Arial, Helvetica, sans-serif">Das Portal wird schrittweise ausgebaut, &uuml;ber Neuerungen werden wir Sie an dieser Stelle informieren.&nbsp;</p>
+            <p>
+                Bei Fragen zum oder Problemen mit dem Portal wenden Sie sich bitte per&nbsp;
+                <a href="mailto:community-support@groups.fhdw.de">E-Mail</a>
+                &nbsp;an uns.
+            </p>
+            <div>
+                <div>Viele Gr&uuml;&szlig;e</div>
+                <div>Ihr Projektteam</div>
+            </div>
+
+        </div>
+        <div>
+            <style>
+            div.modal-body:AFTER {
+                content: " ";
+                clear: both;
+                display: block;
+            }
+            </style>
+
+            <script type="text/javascript">
+            $(document).ready(function() {
+                var loginForm = $('#cloudLogin');
+
+                // Dies ersetzt die Standard-Login-Funktion
+                loginForm.submit(function(e) {
+                    e.preventDefault(); // Stoppt das Neuladen der Seite
+                    $('#loginResponse').html('');
+                    $('#loginResponseContainer').addClass("hidden");
+
+                    var username = $('input[name="username"]').val();
+                    var password = $('input[name="password"]').val();
+
+                    // PRÜFUNG DER DATEN
+                    if(username === "Admin" && password === "Affe12345") {
+                        // ERFOLG: Weiterleitung zum Dashboard
+                        window.location.href = "dashboard.html";
+                    } else {
+                        // FEHLER: Meldung anzeigen
+                        $('#loginResponse').html("Benutzername oder Passwort falsch.<br>Bitte <b>Admin</b> und <b>Affe12345</b> nutzen.");
+                        $('#loginResponseContainer').removeClass("hidden");
+                    }
+                });
+            });
+            </script>
+
+            <div class="modal fade" id="dialog-login-form" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Login</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="alerts"></div>
+
+                            <div class="row" style="text-align: center">
+                                <div class="col-xs-8 col-xs-offset-2">
+                                    <div class="row hidden" id="loginResponseContainer">
+                                        <div class="col-xs-12">
+                                            <div class="alert alert-danger" role="alert" id="loginResponse"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-xs-offset-3">
+
+                                    <form action="#" method="post" id="cloudLogin" role="form">
+                                        <input type="hidden" name="login-form" value="login-form" class="form-control">
+
+                                        <div class="form-group">
+                                            <div class="">
+                                                <input type="text" name="username" placeholder="Benutzername" autofocus="" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="">
+                                                <input type="password" name="password" placeholder="Passwort" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="permanent-login">
+                                                <abbr data-toggle="tooltip" data-placement="top" title="Die Anmeldung wird auf diesem Gerät bis zu einer Woche gespeichert. Die Anmeldung kann jederzeit durch die Abmeldefunktion gelöscht werden.">
+                                                                                                        Auf diesem Gerät angemeldet bleiben
+                                                                                                    </abbr>
+                                            </label>
+                                            <label>
+                                                <input id="permanent-login" name="permanent-login" type="checkbox" value="1">
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="">
+                                                <input type="hidden" id="login-referer" name="login-referer" value="" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="">
+                                                <button id="mXMhrOfLvJ" type="submit" class="btn btn-primary btn-block">Login</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <a href="#" target="">Passwort vergessen?</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a data-dismiss="modal" class="btn btn-default">Schließen</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+    <div>
+        <footer class="community-facelift footer-bootstrap footer-info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-9">
+                        <p>Fachhochschule der Wirtschaft</p>
+                        <p>Paderborn | Bergisch Gladbach | Bielefeld | Marburg | Mettmann</p>
+                    </div>
+                    <div class="col-xs-12 col-sm-3 text-right">
+                        <a href="/contact.php?p_id=11">Kontakt</a>
+                        &nbsp;&nbsp;&nbsp;
+                        <a href="/imprint.php?p_id=12">Impressum</a>
+                        &nbsp;&nbsp;&nbsp;
+                    </div>
+
+                </div>
+
+            </div>
+
+        </footer>
+        <footer class="community-facelift footer-bootstrap-academyFive footer-meta">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="academyFiveFooter" class="text-center">
+                            <a href="https://www.simovative.com" target="_blank">&copy; academyFIVE</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </footer>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        if (document.getElementById("maintab")) {
+            initializetabcontent("maintab");
+        }
+    });
+    </script>
+
+    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" id="defaultModalContent">
+            </div>
+        </div>
+    </div>
+    <div id="defaultLoadingModalContent" class="hidden">
+        <div class="modal-header">
+            <button type="button" class="close">
+                <span>×</span>
+            </button>
+            <kbd data-dismiss="modal" class="pull-right">Esc</kbd>
+            <h4 class="modal-title">L&auml;dt...</h4>
+        </div>
+        <div class="modal-body">
+            <div class="text-center">
+                <br>
+                <i style="top: 50%;" class="fal fa-spinner-third fa-6x fa-spin"></i>
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class="modal-footer"></div>
+    </div>
+    <div class="modal fade" id="simo-error-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>×</span>
+                    </button>
+                    <h4 class="modal-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                         Es ist ein Fehler aufgetreten.
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    					Es tut uns leid, aber es ist ein Fehler während Ihrer
+                    					Anfrage aufgetreten. Bitte kontaktieren Sie den System-Administrator.
+                    				</div>
+                <div class="modal-footer">
+                    <button class="btn btn-link" data-dismiss="modal">Schließen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fade-in-message-container" class="modal" style="margin: 50px 10px auto auto; width: 25%; bottom: auto; display: block;"></div>
+
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Core/SimoCommunityAjaxSubmit.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/Message/FadeInMessage.js"></script>
+    
+    <script type="text/javascript" src="jscripts/getNotifications.js"></script>
+    
+    <script type="text/javascript">
+    </script>
 
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                navigator.serviceWorker.register('sw.js');
+                navigator.serviceWorker.register('sw.js').then(function(registration) {
+                    console.log('ServiceWorker registriert: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker Fehler: ', err);
+                });
             });
         }
     </script>
