@@ -1,0 +1,288 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Abgaben</title>
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#21376a">
+    <link rel="apple-touch-icon" href="img/homescreen192.png">
+
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/style.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/vorlage.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/fontawesome/css/all.min.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.custom.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/buttons.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/content.css" type="text/css"/>
+    
+    <link rel="stylesheet" href="styles/custom.css" type="text/css" media="all"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
+    <style>
+        /* Navbar Fixes */
+        .navbar-nav > li > a { line-height: 20px !important; }
+        .navbar { min-height: 50px !important; border: 1px solid transparent; margin-bottom: 20px; }
+
+        /* --- BEWERTUNG STYLES --- */
+        .feedback-container {
+            background-color: #fff;
+            padding: 30px;
+            border: 1px solid #ddd;
+            text-align: center;
+            border-top: 3px solid #21376a; /* Der blaue Strich oben */
+            margin-top: 20px;
+        }
+
+        .feedback-title {
+            font-size: 24px;
+            color: #21376a;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .feedback-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Sterne Styling */
+        .star-rating {
+            font-size: 40px;
+            color: #ddd; /* Grau standardmäßig */
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        /* Wenn ausgewählt oder gehovert -> Orange */
+        .star-rating .fa-star.checked,
+        .star-rating .fa-star.hover {
+            color: #f39200; /* FHDW Orange */
+        }
+
+        /* Textarea Styling */
+        textarea.form-control {
+            resize: none;
+            border-radius: 0;
+            box-shadow: none;
+            border-color: #ccc;
+        }
+
+        /* Button Styling */
+        .btn-submit {
+            margin-top: 20px;
+            width: 100%;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #21376a;
+            border-color: #21376a;
+            color: #fff;
+        }
+        
+        .btn-submit:hover {
+            background-color: #1a2b55;
+            color: #fff;
+        }
+
+        /* Ausgegrauter Button */
+        .btn-submit:disabled {
+            background-color: #eee;
+            border-color: #ddd;
+            color: #999;
+            cursor: not-allowed;
+        }
+    </style>
+
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body id="community-facelift">
+    <div id="container-spacer">
+        <div class="community-facelift header-logo-box">
+            <div class="container" style="overflow: hidden;">
+                <a title="Home" href="dashboard.html">
+                    <img src="img/Community_Banner.jpg" class="img-responsive" alt="page logo"/>
+                </a>
+            </div>
+        </div>
+
+        <nav role="navigation" id="top-navigation" class="navbar navbar-default community-facelift">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-id">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="dashboard.html" class="navbar-brand">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse-id">
+                    <ul class="nav navbar-nav">
+                        <li><a href="profile.html">Mein Profil</a></li>
+                        <li><a href="timetable.html">Stundenplan</a></li>
+                        <li><a href="pruefungstermine.html">Prüfungstermine</a></li>
+                        <li><a href="notenuebersicht.html">Notenübersicht</a></li>
+                        <li><a href="dokumente.html">Dokumente</a></li>
+                        <li class="active"><a href="abgaben.html">Abgaben</a></li>
+                        <li><a href="kurzbewerbung.html">Kurzbewerbung Master-Studium</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container" style="padding-top: 15px; padding-bottom: 15px;">
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle dropdown-slim" data-toggle="dropdown">
+                        <span class="far fa-user"></span> Mehmet Güngörmez <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.html"><span class="far fa-power-off"></span> Ausloggen</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pull-left">
+                <div class="community-facelift btn-group btn-breadcrumb">
+                    <a class="btn btn-default" href="dashboard.html">Startseite</a>
+                    <a class="btn btn-default" href="abgaben.html">Abgaben</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    
+                    <div class="feedback-container">
+                        <h2 class="feedback-title">Wir würden uns sehr über eine Bewertung freuen</h2>
+                        <p class="feedback-subtitle">Wie fandest du die Präsentation?</p>
+
+                        <div class="star-rating" id="starRating">
+                            <span class="fa fa-star" data-value="1"></span>
+                            <span class="fa fa-star" data-value="2"></span>
+                            <span class="fa fa-star" data-value="3"></span>
+                            <span class="fa fa-star" data-value="4"></span>
+                            <span class="fa fa-star" data-value="5"></span>
+                        </div>
+
+                        <form onsubmit="return false;">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="4" placeholder="Optional: Hinterlasse uns einen Kommentar..." id="feedbackText"></textarea>
+                            </div>
+                            <button id="submitBtn" class="btn btn-submit" disabled>Abschicken</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style="height: 100px;"></div>
+        </div>
+    </div>
+
+    <footer class="community-facelift footer-bootstrap footer-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-9"><p>Fachhochschule der Wirtschaft</p><p>Paderborn | Bergisch Gladbach | Bielefeld | Marburg | Mettmann</p></div>
+                <div class="col-xs-12 col-sm-3 text-right"><a href="#">Kontakt</a> &nbsp;&nbsp;&nbsp; <a href="#">Impressum</a></div>
+            </div>
+        </div>
+    </footer>
+    
+    <footer class="community-facelift footer-bootstrap-academyFive footer-meta">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12"><div id="academyFiveFooter" class="text-center"><a href="https://www.simovative.com" target="_blank">&copy; academyFIVE</a></div></div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            // Service Worker registrieren
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('sw.js');
+                });
+            }
+
+            // Push-Rechte beim Laden anfragen
+            if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+                Notification.requestPermission();
+            }
+
+            var currentRating = 0;
+
+            // 1. Hover Effekt
+            $('.star-rating .fa-star').on('mouseenter', function() {
+                var hoverVal = $(this).data('value');
+                $('.star-rating .fa-star').each(function() {
+                    if ($(this).data('value') <= hoverVal) {
+                        $(this).addClass('hover');
+                    } else {
+                        $(this).removeClass('hover');
+                    }
+                });
+            });
+
+            // 2. Hover Ende
+            $('.star-rating').on('mouseleave', function() {
+                $('.star-rating .fa-star').removeClass('hover');
+            });
+
+            // 3. Klick (Bewertung)
+            $('.star-rating .fa-star').on('click', function() {
+                currentRating = $(this).data('value');
+                $('.star-rating .fa-star').removeClass('checked');
+                $('.star-rating .fa-star').each(function() {
+                    if ($(this).data('value') <= currentRating) {
+                        $(this).addClass('checked');
+                    }
+                });
+                $('#submitBtn').prop('disabled', false);
+            });
+
+            // 4. PUSH-FUNKTION
+            function sendFeedbackNotification(rating) {
+                if (Notification.permission === "granted") {
+                    navigator.serviceWorker.getRegistration().then(function(reg) {
+                        var options = {
+                            body: 'Du hast die Präsentation mit ' + rating + ' Sternen bewertet. Vielen Dank!',
+                            icon: 'img/homescreen192.png',
+                            vibrate: [100, 50, 100],
+                            data: { dateOfArrival: Date.now() }
+                        };
+                        if (reg) {
+                            reg.showNotification('Bewertung erfolgreich!', options);
+                        } else {
+                            new Notification('Bewertung erfolgreich!', options);
+                        }
+                    });
+                } else {
+                    Notification.requestPermission();
+                }
+            }
+
+            // 5. Button Klick (Push statt Alert!)
+            $('#submitBtn').click(function() {
+                // Button kurz sperren oder so lassen
+                // Sende die Push-Nachricht
+                sendFeedbackNotification(currentRating);
+                
+                // Optional: Button Text ändern um Erfolg anzuzeigen
+                $(this).text("Gesendet!");
+                $(this).prop('disabled', true);
+            });
+        });
+    </script>
+</body>
+</html>

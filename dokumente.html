@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="revisit-after" content="1 days"/>
+    <meta name="robots" content="INDEX, FOLLOW"/>
+    <title>Dokumente</title>
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#21376a">
+    <link rel="apple-touch-icon" href="img/homescreen192.png">
+
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/autocomplete.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/autosuggest.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/style.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/vorlage.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/fontawesome/css/all.min.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap-select.min.css" type="text/css">
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.custom.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/buttons.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/infopool.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/content.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/css.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/general.css" type="text/css"/>
+    
+    <link rel="stylesheet" href="styles/custom.css" type="text/css" media="all"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
+    <style>
+        /* Navbar Fixes (Exakt wie in Notenübersicht) */
+        .navbar-nav > li > a { line-height: 20px !important; }
+        .navbar { min-height: 50px !important; border: 1px solid transparent; margin-bottom: 20px; }
+
+        /* Dokumenten-Spezifisch */
+        .control-label {
+            padding-top: 7px;
+            margin-bottom: 0;
+            text-align: right;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .btn-primary {
+            background-color: #337ab7;
+            border-color: #2e6da4;
+            color: #fff;
+        }
+        
+        /* Button initial verstecken */
+        #download-btn { display: none; }
+    </style>
+
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap-select.min.js"></script>
+</head>
+
+<body id="community-facelift">
+    <div id="container-spacer">
+        <div class="community-facelift header-logo-box">
+            <div class="container" style="overflow: hidden;">
+                <a title="Home" href="dashboard.html">
+                    <img src="img/Community_Banner.jpg" class="img-responsive" alt="page logo"/>
+                </a>
+            </div>
+        </div>
+
+        <nav role="navigation" id="top-navigation" class="navbar navbar-default community-facelift">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-id">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="dashboard.html" class="navbar-brand">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse-id">
+                    <ul class="nav navbar-nav">
+                        <li><a href="profile.html">Mein Profil</a></li>
+                        <li><a href="timetable.html">Stundenplan</a></li>
+                        <li><a href="pruefungstermine.html">Prüfungstermine</a></li>
+                        <li><a href="notenuebersicht.html">Notenübersicht</a></li>
+                        <li class="active"><a href="dokumente.html">Dokumente</a></li>
+                        <li><a href="abgaben.html">Abgaben</a></li>
+                        <li><a href="kurzbewerbung.html">Kurzbewerbung Master-Studium</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container" style="padding-top: 15px; padding-bottom: 15px;">
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle dropdown-slim" data-toggle="dropdown">
+                        <span class="far fa-user"></span> Mehmet Güngörmez <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.html"><span class="far fa-power-off"></span> Ausloggen</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pull-left">
+                <div class="community-facelift btn-group btn-breadcrumb">
+                    <a class="btn btn-default" href="dashboard.html">Startseite</a>
+                    <a class="btn btn-default" href="dokumente.html">Dokumente</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <form id="documentForm" class="form-horizontal" role="form" onsubmit="return false;">
+                
+                <div class="form-group">
+                    <label for="documentId" class="col-sm-2 col-xs-12 control-label">Dokument</label>
+                    <div class="col-sm-10 col-xs-12">
+                        <select class="form-control" name="documentId" id="documentId">
+                            <option value="" selected>Bitte wählen</option>
+                            <option value="files/Präsentation PWA M.pptx">PowerPoint Folie - PWA</option>
+                            <option value="files/Präsentation Handout PWA.pdf">Präsentation Handout - PWA</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <br/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button id="download-btn" class="btn btn-default btn-primary pull-right">
+                            Herunterladen
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+
+            <div style="height: 300px;"></div>
+        </div>
+    </div>
+
+    <footer class="community-facelift footer-bootstrap footer-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-9"><p>Fachhochschule der Wirtschaft</p><p>Paderborn | Bergisch Gladbach | Bielefeld | Marburg | Mettmann</p></div>
+                <div class="col-xs-12 col-sm-3 text-right"><a href="#">Kontakt</a> &nbsp;&nbsp;&nbsp; <a href="#">Impressum</a></div>
+            </div>
+        </div>
+    </footer>
+    
+    <footer class="community-facelift footer-bootstrap-academyFive footer-meta">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12"><div id="academyFiveFooter" class="text-center"><a href="https://www.simovative.com" target="_blank">&copy; academyFIVE</a></div></div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            // Service Worker registrieren (Wichtig für PWA und Push)
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('sw.js');
+                });
+            }
+
+            // Benachrichtigungen erlauben (Fragt den Nutzer beim Laden der Seite)
+            if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+                Notification.requestPermission();
+            }
+
+            // 1. Button nur anzeigen, wenn etwas ausgewählt wurde
+            $('#documentId').change(function() {
+                var selectedValue = $(this).val();
+                if (selectedValue && selectedValue !== "") {
+                    $('#download-btn').show(); // Button einblenden
+                } else {
+                    $('#download-btn').hide(); // Button ausblenden
+                }
+            });
+
+            // 2. Funktion für Push-Nachricht
+            function sendPushNotification(fileName) {
+                if (Notification.permission === "granted") {
+                    navigator.serviceWorker.getRegistration().then(function(reg) {
+                        var options = {
+                            body: fileName + ' wurde erfolgreich heruntergeladen.',
+                            icon: 'img/homescreen192.png', // Dein App Icon
+                            vibrate: [100, 50, 100],
+                            data: {
+                                dateOfArrival: Date.now()
+                            }
+                        };
+                        // Wenn Service Worker aktiv, nutze ihn (besser für Android)
+                        if (reg) {
+                            reg.showNotification('Download abgeschlossen', options);
+                        } else {
+                            // Fallback für Desktop
+                            new Notification('Download abgeschlossen', options);
+                        }
+                    });
+                } else {
+                    // Falls Erlaubnis noch fehlt, jetzt fragen
+                    Notification.requestPermission();
+                }
+            }
+
+            // 3. Download & Push beim Klicken
+            $('#download-btn').click(function() {
+                var selectedValue = $('#documentId').val(); // Der Pfad (z.B. files/....pptx)
+                var selectedText = $("#documentId option:selected").text(); // Der Name (z.B. PowerPoint Folie - PWA)
+
+                if(selectedValue) {
+                    // A) Download starten
+                    var link = document.createElement('a');
+                    link.href = selectedValue;
+                    link.download = selectedValue.split('/').pop();
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // B) Push Nachricht senden (kleine Verzögerung wirkt natürlicher)
+                    setTimeout(function() {
+                        sendPushNotification(selectedText);
+                    }, 500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

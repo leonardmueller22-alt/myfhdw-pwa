@@ -1,0 +1,407 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prüfungstermine</title>
+
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/style.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/vorlage.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/fontawesome/css/all.min.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/css.css" type="text/css"/>
+    
+    <link rel="stylesheet" href="styles/custom.css" type="text/css" media="all"/>
+
+    <style>
+        /* --- HARDCORE OVERRIDES DAMIT ES WIE DAS ORIGINAL AUSSIEHT --- */
+
+        /* 1. HEADER & BANNER */
+        .header-logo-box {
+            background-color: #fff;
+            padding: 0;
+            border-bottom: none;
+        }
+        /* Stellt sicher, dass das Bannerbild richtig sitzt */
+        .header-logo-box img {
+            max-height: 120px; /* Oder je nach Bildgröße anpassen */
+            width: auto;
+            max-width: 100%;
+        }
+
+        /* 2. NAVIGATION (Dunkelblau & Orange) */
+        #top-navigation.navbar-default {
+            background-color: #21376a !important; /* FHDW Dunkelblau */
+            border: none;
+            border-radius: 0;
+            margin-bottom: 20px;
+            min-height: 50px;
+        }
+        
+        /* Die Links in der Navbar */
+        #top-navigation .navbar-nav > li > a {
+            color: #ffffff !important;
+            font-weight: bold;
+            padding: 15px 20px;
+            font-size: 14px;
+        }
+
+        /* Der AKTIVE Reiter (Orange) */
+        #top-navigation .navbar-nav > li.active > a,
+        #top-navigation .navbar-nav > li.active > a:hover,
+        #top-navigation .navbar-nav > li.active > a:focus {
+            background-color: #f39200 !important; /* FHDW Orange */
+            color: #ffffff !important;
+        }
+
+        /* Hover Effekt für nicht-aktive Links */
+        #top-navigation .navbar-nav > li > a:hover {
+            background-color: #3b5a9b !important; /* Leicht helleres Blau */
+        }
+
+        /* Login/User Dropdown rechts */
+        .navbar-btn {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        /* 3. BREADCRUMB & USER MENU LEISTE */
+        .breadcrumb-container {
+            margin-bottom: 20px;
+            padding: 0 15px;
+        }
+        .breadcrumb {
+            background: transparent;
+            padding: 8px 0;
+            margin-bottom: 0;
+            font-size: 12px;
+        }
+        .breadcrumb > li > a {
+            color: #333;
+            text-decoration: none;
+        }
+        .breadcrumb > .active {
+            color: #777;
+        }
+
+        /* 4. TABELLEN DESIGN (Exakt wie Screenshot 1) */
+        .table-original {
+            font-size: 12px;
+            border: 1px solid #ddd;
+            width: 100%;
+            background-color: #fff;
+        }
+        
+        /* Kopfzeile */
+        .table-original thead tr th {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            color: #333;
+            font-weight: bold;
+            padding: 8px;
+            vertical-align: top;
+        }
+
+        /* Tabellenzellen */
+        .table-original tbody tr td {
+            border-top: 1px solid #ddd;
+            border-right: 1px solid #ddd; /* Vertikale Linien */
+            padding: 8px;
+            vertical-align: top;
+            color: #333;
+        }
+
+        /* Die erste Spalte (Prüfung) hat spezielles Styling */
+        .col-exam-title b {
+            color: #000;
+            font-weight: bold;
+        }
+        .col-exam-name {
+            display: block;
+            margin-top: 4px;
+            color: #21376a; /* Blau */
+            font-size: 13px;
+        }
+
+        /* Button "Angemeldete Prüfungen" */
+        .btn-tab-wrapper {
+            text-align: right;
+            margin-bottom: 0; 
+            border-bottom: 1px solid #ddd;
+        }
+        .btn-tab-fake {
+            display: inline-block;
+            background-color: #eee; /* Grau hinterlegt wie im Bild */
+            border: 1px solid #ddd;
+            border-bottom: 1px solid #fff; /* Unten offen zum Content */
+            padding: 8px 15px;
+            color: #333;
+            font-size: 13px;
+            position: relative;
+            top: 1px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            text-decoration: none;
+        }
+        .btn-tab-fake:hover {
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* Info Box Blau */
+        .alert-info-custom {
+            background-color: #d9edf7;
+            border: 1px solid #bce8f1;
+            color: #31708f;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body id="community-facelift">
+
+    <div id="container-spacer">
+        <div class="community-facelift header-logo-box">
+            <div class="container">
+                <a href="dashboard.html">
+                    <img src="img/Community_Banner.jpg" class="img-responsive" alt="FHDW Banner"/>
+                </a>
+            </div>
+        </div>
+
+        <nav id="top-navigation" class="navbar navbar-default community-facelift">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-id">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="dashboard.html" class="navbar-brand" style="color:#fff;">
+                        <span class="glyphicon glyphicon-home"></span>
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbar-collapse-id">
+                    <ul class="nav navbar-nav">
+                        <li><a href="profile.html">Mein Profil</a></li>
+                        <li><a href="timetable.html">Stundenplan</a></li>
+                        <li class="active"><a href="pruefungstermine.html">Prüfungstermine</a></li>
+                        <li><a href="notenuebersicht.html">Notenübersicht</a></li>
+                        <li><a href="dokumente.html">Dokumente</a></li>
+                        <li><a href="abgaben.html">Abgaben</a></li>
+                        <li><a href="kurzbewerbung.html">Kurzbewerbung Master-Studium</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container breadcrumb-container">
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" style="background: #fff; border: 1px solid #ccc;">
+                        <span class="far fa-user"></span> Mehmet Güngörmez <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.html">Ausloggen</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pull-left">
+                <div class="btn-group btn-breadcrumb">
+                    <a href="dashboard.html" class="btn btn-default btn-xs" style="border:none; background:none; padding-left:0;">Startseite</a> 
+                    <span style="color:#ccc">/</span> 
+                    <span class="btn btn-default btn-xs disabled" style="border:none; background:none; color:#777;">Prüfungstermine</span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="container">
+            
+            <div class="alert alert-info-custom">
+                Hier sehen Sie eine Liste Ihrer geplanten Prüfungen. Ihre Prüfungstermine finden Sie zudem immer in Ihrem Stundenplan.
+            </div>
+
+            <div class="btn-tab-wrapper">
+                <a href="#" class="btn-tab-fake">Angemeldete Prüfungen</a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-original">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%">Prüfung</th>
+                            <th style="width: 12%">Datum & Zeit</th>
+                            <th style="width: 12%">Zusatz</th>
+                            <th style="width: 12%">Dozierende</th>
+                            <th style="width: 12%">Beisitzende</th>
+                            <th style="width: 10%">Raum</th>
+                            <th style="width: 17%">Prüfungsform</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-exam-title">
+                                <b>25.02.2026 10:45 - 13:00 Uhr</b> - noch 23 Tage
+                                <span class="col-exam-name">Praxisphase</span>
+                            </td>
+                            <td>25.02.2026<br>10:45 - 13:00</td>
+                            <td>BFWC423A</td>
+                            <td>Christian Soltenborn</td>
+                            <td>Christian Soltenborn</td>
+                            <td>B-D01</td>
+                            <td>Referat -<br>Praxisphase</td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-exam-title">
+                                <b>20.04.2026 11:00 - 12:30 Uhr</b> - noch 77 Tage
+                                <span class="col-exam-name">IT-Compliance, Prozesse und Architekturen</span>
+                            </td>
+                            <td>20.04.2026<br>11:00 - 12:30</td>
+                            <td>BFWC423A,<br>MFWC423A</td>
+                            <td>Walter Speth</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>B-D01<br>B-D05</td>
+                            <td>Klausur</td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-exam-title">
+                                <b>24.04.2026 08:30 - 10:00 Uhr</b> - noch 81 Tage
+                                <span class="col-exam-name">Wirtschaftsrecht</span>
+                            </td>
+                            <td>24.04.2026<br>08:30 - 10:00</td>
+                            <td>BFWC423A,<br>BFWS423A</td>
+                            <td>Patrick Redell</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>B-D01<br>B-D05</td>
+                            <td>Klausur</td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-exam-title">
+                                <span class="col-exam-name" style="margin-top:0">Advanced Topics in Computer Science</span>
+                            </td>
+                            <td></td>
+                            <td>BFWC423A,<br>BFWS423A</td>
+                            <td>Roland Pleger</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>Referat</td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-exam-title">
+                                <span class="col-exam-name" style="margin-top:0">Entrepreneurship</span>
+                            </td>
+                            <td></td>
+                            <td>BFWC423A,<br>BFWS423A</td>
+                            <td>Ulrike Biedendieck</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>Kombination von<br>Prüfungsformen</td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-exam-title">
+                                <span class="col-exam-name" style="margin-top:0">Implementierung digitaler Geschäftsprozesse</span>
+                            </td>
+                            <td></td>
+                            <td>BFWC423A,<br>BFWS423A</td>
+                            <td>Joachim Bloemer</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>Referat</td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-exam-title">
+                                <span class="col-exam-name" style="margin-top:0">Marketing</span>
+                            </td>
+                            <td></td>
+                            <td>BFWC423A,<br>BFWS423A</td>
+                            <td>Stefan Helmke</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>Referat</td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-exam-title">
+                                <span class="col-exam-name" style="margin-top:0">Securing Digital Transformation</span>
+                            </td>
+                            <td></td>
+                            <td>BFWC423A</td>
+                            <td>Walter Speth</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>Referat</td>
+                        </tr>
+
+                        <tr>
+                            <td class="col-exam-title">
+                                <span class="col-exam-name" style="margin-top:0">Web Technologies and Applications</span>
+                            </td>
+                            <td></td>
+                            <td>BFWC423A,<br>BFWS423A</td>
+                            <td>Patrick Kobsch</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>Nicht zugeordnet</td>
+                            <td>Referat</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="font-size: 12px; margin-top: 10px; color:#333;">
+                <b>1 - 9</b> von <b>9</b>, Ergebnisse pro Seite: <b>50</b> <i class="fas fa-caret-up"></i>
+            </div>
+
+            <div style="height: 60px;"></div>
+        </div>
+    </div>
+
+    <footer class="community-facelift footer-bootstrap footer-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-9">
+                    <p>Fachhochschule der Wirtschaft</p>
+                    <p>Paderborn | Bergisch Gladbach | Bielefeld | Marburg | Mettmann</p>
+                </div>
+                <div class="col-xs-12 col-sm-3 text-right">
+                    <a href="#">Kontakt</a> &nbsp;&nbsp;&nbsp; <a href="#">Impressum</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <footer class="community-facelift footer-bootstrap-academyFive footer-meta">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div id="academyFiveFooter" class="text-center">
+                        <a href="https://www.simovative.com" target="_blank">&copy; academyFIVE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+    </script>
+</body>
+</html>
