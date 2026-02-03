@@ -16,6 +16,7 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#21376a">
     <link rel="apple-touch-icon" href="img/homescreen192.png">
+
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/autocomplete.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/autosuggest.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/style.css" type="text/css"/>
@@ -306,7 +307,7 @@
                     // PRÜFUNG DER DATEN
                     if(username === "Admin" && password === "Affe12345") {
                         
-                        // WICHTIG: MERKER FÜR BENACHRICHTIGUNG SETZEN!
+                        // HIER IST DER FIX: MERKER SETZEN!
                         sessionStorage.setItem('showWelcome', 'true');
                         
                         // ERFOLG: Weiterleitung zum Dashboard
@@ -483,12 +484,10 @@
 
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Core/SimoCommunityAjaxSubmit.js"></script>
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/Message/FadeInMessage.js"></script>
-    
     <script type="text/javascript" src="jscripts/getNotifications.js"></script>
-    
     <script type="text/javascript">
     </script>
-
+    
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
