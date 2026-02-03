@@ -231,6 +231,25 @@
                 }, function(err) {
                     console.log('ServiceWorker Fehler: ', err);
                 });
+                var inactivityTime = function () {
+        var time;
+        window.onload = resetTimer;
+        document.onmousemove = resetTimer;
+        document.onkeypress = resetTimer;
+        document.onclick = resetTimer;
+
+        function logout() {
+            // Optional: alert entfernen, wenn es nervt
+            // alert("Du wurdest automatisch ausgeloggt."); 
+            window.location.href = 'index.html';
+        }
+
+        function resetTimer() {
+            clearTimeout(time);
+            time = setTimeout(logout, 60000); 
+        }
+    };
+    inactivityTime();
             });
         }
     </script>
