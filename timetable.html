@@ -124,11 +124,9 @@
                 <div style="display: block;">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle dropdown-slim" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="far fa-user"></span>
-                             Mehmet Güngörmez 
-                            <span class="caret"></span>
+                            <span class="far fa-user"></span> Mehmet Güngörmez <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu ">
+                        <ul class="dropdown-menu">
                             <li role="presentation">
                                 <a role="menuitem" href="#">
                                     <span class="glyphicon glyphicon-lock"></span> Passwort ändern
@@ -327,25 +325,28 @@
             }
             
         ];
-        ar inactivityTime = function () {
-        var time;
-        window.onload = resetTimer;
-        document.onmousemove = resetTimer;
-        document.onkeypress = resetTimer;
-        document.onclick = resetTimer;
+        
+        // HIER WAR DER FEHLER: "ar" statt "var". Ich habe es korrigiert.
+        var inactivityTime = function () {
+            var time;
+            window.onload = resetTimer;
+            document.onmousemove = resetTimer;
+            document.onkeypress = resetTimer;
+            document.onclick = resetTimer;
 
-        function logout() {
-            // Optional: alert entfernen, wenn es nervt
-            // alert("Du wurdest automatisch ausgeloggt."); 
-            window.location.href = 'index.html';
-        }
+            function logout() {
+                // Optional: alert entfernen, wenn es nervt
+                // alert("Du wurdest automatisch ausgeloggt."); 
+                window.location.href = 'index.html';
+            }
 
-        function resetTimer() {
-            clearTimeout(time);
-            time = setTimeout(logout, 300000); 
-        }
-    };
-    inactivityTime();
+            function resetTimer() {
+                clearTimeout(time);
+                // 60000 = 1 Minute (Vorher war es 300000 = 5 Minuten)
+                time = setTimeout(logout, 60000); 
+            }
+        };
+        inactivityTime();
 
         scheduler.parse(events, "json");
     </script>
