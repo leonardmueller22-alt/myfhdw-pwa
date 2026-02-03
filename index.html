@@ -112,8 +112,8 @@
     <div id="container-spacer">
         <div class="community-facelift header-logo-box">
             <div class="container" style="overflow: hidden;">
-                <a title="Home" href="/">
-                    <img src="img/Community_Banner.jpg" class="img-responsive" alt="page logo" onerror="this.style.display='none'"/>
+                <a title="Home" href="#">
+                    <img src="img/Community_Banner.jpg" class="img-responsive" alt="page logo"/>
                 </a>
             </div>
         </div>
@@ -289,6 +289,8 @@
                 clear: both;
                 display: block;
             }
+            /* Menü auf Login-Seite ausblenden */
+            #top-navigation .nav.navbar-nav { display: none; }
             </style>
 
             <script type="text/javascript">
@@ -307,14 +309,14 @@
                     // PRÜFUNG DER DATEN
                     if(username === "Admin" && password === "Affe12345") {
                         
-                        // HIER IST DER FIX: MERKER SETZEN!
+                        // MERKER SETZEN
                         sessionStorage.setItem('showWelcome', 'true');
                         
                         // ERFOLG: Weiterleitung zum Dashboard
                         window.location.href = "dashboard.html";
                     } else {
-                        // FEHLER: Meldung anzeigen
-                        $('#loginResponse').html("Benutzername oder Passwort falsch);
+                        // FEHLER: Meldung anzeigen (JETZT OHNE HINWEIS AUF PASSWORT)
+                        $('#loginResponse').html("Benutzername oder Passwort falsch.");
                         $('#loginResponseContainer').removeClass("hidden");
                     }
                 });
@@ -484,10 +486,12 @@
 
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Core/SimoCommunityAjaxSubmit.js"></script>
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/Message/FadeInMessage.js"></script>
+    
     <script type="text/javascript" src="jscripts/getNotifications.js"></script>
+    
     <script type="text/javascript">
     </script>
-    
+
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
