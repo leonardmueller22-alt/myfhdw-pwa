@@ -18,18 +18,23 @@
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/vorlage.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/fontawesome/css/all.min.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap-select.min.css" type="text/css">
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.custom.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/buttons.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/infopool.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/content.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/css.css" type="text/css"/>
+    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/general.css" type="text/css"/>
     
     <link rel="stylesheet" href="styles/custom.css" type="text/css" media="all"/>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
     <style>
+        /* Navbar Fixes */
         .navbar-nav > li > a { line-height: 20px !important; }
         .navbar { min-height: 50px !important; border: 1px solid transparent; margin-bottom: 20px; }
 
+        /* Dokumenten Label */
         .control-label {
             padding-top: 7px;
             margin-bottom: 0;
@@ -38,19 +43,20 @@
             color: #333;
         }
         
-        /* Macht den Button schön blau */
+        /* Button Style (Blau) */
         .btn-primary {
             background-color: #337ab7;
             border-color: #2e6da4;
             color: #fff;
         }
 
-        /* WICHTIG: Button ist standardmäßig UNSICHTBAR */
+        /* WICHTIG: Button ist standardmäßig NICHT SICHTBAR (wie im Original) */
         #download-btn { display: none; }
     </style>
 
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap-select.min.js"></script>
 </head>
 
 <body id="community-facelift">
@@ -101,6 +107,7 @@
                     </ul>
                 </div>
             </div>
+            
             <div class="pull-left">
                 <div class="community-facelift btn-group btn-breadcrumb">
                     <a class="btn btn-default" href="dashboard.html">Startseite</a>
@@ -110,6 +117,7 @@
         </div>
 
         <div class="container">
+
             <form id="documentForm" class="form-horizontal" role="form" onsubmit="return false;">
                 
                 <div class="form-group">
@@ -124,17 +132,21 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-12"><br/></div>
+                    <div class="col-xs-12">
+                        <br/>
+                    </div>
                 </div>
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <button id="download-btn" class="btn btn-primary pull-right">
+                        <button id="download-btn" class="btn btn-default btn-primary pull-right">
                             Herunterladen
                         </button>
                     </div>
                 </div>
+
             </form>
+
             <div style="height: 300px;"></div>
         </div>
     </div>
@@ -165,39 +177,38 @@
                 });
             }
 
-            // Benachrichtigungen
+            // Benachrichtigungen Erlaubnis
             if (Notification.permission !== "granted" && Notification.permission !== "denied") {
                 Notification.requestPermission();
             }
 
-            // --- LOGIK: BUTTON ANZEIGEN / VERSTECKEN ---
             var $select = $('#documentId');
             var $btn = $('#download-btn');
 
+            // --- FUNKTION: Button anzeigen oder verstecken ---
             function checkSelection() {
                 var val = $select.val();
                 
-                // Wenn ein Wert da ist (nicht leer), Button anzeigen.
-                // Sonst komplett ausblenden (nicht nur ausgrauen).
                 if (val && val !== "") {
+                    // Etwas gewählt -> Button ZEIGEN (er ist blau definiert im CSS)
                     $btn.show(); 
                 } else {
+                    // Nichts gewählt -> Button WEG (unsichtbar)
                     $btn.hide(); 
                 }
             }
 
-            // WICHTIG FÜR HANDY: 'change', 'input', 'blur'
-            // Das stellt sicher, dass das Handy reagiert, egal wie man auswählt.
+            // --- EVENT LISTENER (Handy & Desktop) ---
+            // 'change': Standard für Desktop
+            // 'input' & 'blur': Wichtig für Handys (Overlay/Rädchen)
             $select.on('change input blur', function() {
                 checkSelection();
             });
 
-            // GANZ WICHTIG: Beim Laden der Seite sofort prüfen!
-            // Falls das Handy die Auswahl gespeichert hat (wie auf deinem Screenshot),
-            // wird der Button sofort angezeigt.
+            // Initial einmal ausführen beim Laden
             checkSelection();
 
-            // --- DOWNLOAD & PUSH ---
+            // --- DOWNLOAD & PUSH LOGIK ---
             function sendPushNotification(fileName) {
                 if (Notification.permission === "granted") {
                     navigator.serviceWorker.getRegistration().then(function(reg) {
@@ -234,14 +245,14 @@
                 }
             });
 
-            // --- AUTO LOGOUT ---
+            // --- AUTO LOGOUT (1 Minute) ---
             var inactivityTime = function () {
                 var time;
                 window.onload = resetTimer;
                 document.onmousemove = resetTimer;
                 document.onkeypress = resetTimer;
                 document.onclick = resetTimer;
-                document.ontouchstart = resetTimer; 
+                document.ontouchstart = resetTimer; // Wichtig fürs Handy!
 
                 function logout() {
                     window.location.href = 'index.html';
