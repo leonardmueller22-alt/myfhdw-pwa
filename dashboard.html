@@ -50,6 +50,10 @@
     .media-body > div:nth-child(1) { font-size: 18px; color: #21376a; }
     .date_container .date_info { padding-bottom: 50px !important; }
     .date_info { border-left: 0px !important; border-top: 0px !important; border-bottom: 1px black solid !important; }
+    
+    /* Navbar Anpassung */
+    .navbar-nav > li > a { line-height: 20px !important; }
+    .navbar { min-height: 50px !important; border: 1px solid transparent; margin-bottom: 20px; }
     </style>
 
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/js/jquery-2.2.4.min.js"></script>
@@ -103,7 +107,7 @@
                              Mehmet Güngörmez 
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu ">
+                        <ul class="dropdown-menu">
                             <li role="presentation">
                                 <a role="menuitem" href="#">
                                     <span class="glyphicon glyphicon-lock"></span> Passwort ändern
@@ -204,6 +208,7 @@
                 <div>Viele Gr&uuml;&szlig;e</div>
                 <div>Ihr Projektteam</div>
             </div>
+            <div style="height: 100px;"></div>
         </div>
     </div>
 
@@ -234,22 +239,59 @@
     </footer>
 
     <script>
-        window.addEventListener('load', function() {
-            if ('Notification' in window && 'serviceWorker' in navigator) {
-                Notification.requestPermission().then(function(permission) {
-                    if (permission === 'granted') {
-                        navigator.serviceWorker.ready.then(function(registration) {
-                            registration.showNotification('MyFHDW', {
-                                body: 'Erfolgreich eingeloggt! Willkommen zurück.',
-                                icon: 'img/homescreen192.png',
-                                badge: 'img/homescreen192.png',
-                                vibrate: [200, 100, 200],
-                                tag: 'login-notification'
-                            });
-                        });
-                    }
+        $(document).ready(function() {
+            // Service Worker
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('sw.js');
                 });
             }
+
+            // 1. WILLKOMMEN NACHRICHT (Nur einmalig nach Login!)
+            if (sessionStorage.getItem('showWelcome') === 'true') {
+                if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+                    Notification.requestPermission();
+                }
+
+                if (Notification.permission === "granted") {
+                    navigator.serviceWorker.getRegistration().then(function(reg) {
+                        var options = {
+                            body: 'Erfolgreich eingeloggt! Willkommen zurück.',
+                            icon: 'img/homescreen192.png',
+                            vibrate: [100, 50, 100],
+                            data: { dateOfArrival: Date.now() }
+                        };
+                        if (reg) {
+                            reg.showNotification('MyFHDW', options);
+                        } else {
+                            new Notification('MyFHDW', options);
+                        }
+                    });
+                }
+                // Merker löschen, damit es nicht nervt
+                sessionStorage.removeItem('showWelcome');
+            }
+
+            // 2. AUTO-LOGOUT (Nach 1 Minute Inaktivität)
+            var inactivityTime = function () {
+                var time;
+                window.onload = resetTimer;
+                document.onmousemove = resetTimer;
+                document.onkeypress = resetTimer;
+                document.onclick = resetTimer;
+
+                function logout() {
+                    alert("Du wurdest automatisch ausgeloggt.");
+                    window.location.href = 'index.html';
+                }
+
+                function resetTimer() {
+                    clearTimeout(time);
+                    time = setTimeout(logout, 60000); 
+                }
+            };
+            
+            inactivityTime();
         });
     </script>
 </body>
