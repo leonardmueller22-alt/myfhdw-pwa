@@ -400,6 +400,23 @@
                 $(this).closest(".panel").find(".panel-body").slideToggle();
                 $(this).find("span").toggleClass("glyphicon-chevron-down glyphicon-chevron-right");
             });
+            var inactivityTime = function () {
+            var time;
+            window.onload = resetTimer;
+            document.onmousemove = resetTimer;
+            document.onkeypress = resetTimer;
+            document.onclick = resetTimer;
+
+            function logout() {
+                window.location.href = 'index.html';
+            }
+
+            function resetTimer() {
+                clearTimeout(time);
+                time = setTimeout(logout, 60000); 
+            }
+        };
+        inactivityTime();
         });
     </script>
 </body>
