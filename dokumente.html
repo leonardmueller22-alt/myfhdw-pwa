@@ -30,7 +30,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
     <style>
-        /* Navbar Fixes (Exakt wie in Notenübersicht) */
+        /* Navbar Fixes */
         .navbar-nav > li > a { line-height: 20px !important; }
         .navbar { min-height: 50px !important; border: 1px solid transparent; margin-bottom: 20px; }
 
@@ -48,6 +48,9 @@
             border-color: #2e6da4;
             color: #fff;
         }
+
+        /* WICHTIG: Button standardmäßig ausblenden (wie Original) */
+        #download-btn { display: none; }
     </style>
 
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/js/jquery-2.2.4.min.js"></script>
@@ -135,7 +138,7 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <button id="download-btn" class="btn btn-default pull-right" disabled>
+                        <button id="download-btn" class="btn btn-default btn-primary pull-right">
                             Herunterladen
                         </button>
                     </div>
@@ -178,27 +181,27 @@
                 Notification.requestPermission();
             }
 
-            // --- NEUE LOGIK FÜR DAS HANDY ---
+            // --- LOGIK FÜR HANDY & DESKTOP ---
             var $select = $('#documentId');
             var $btn = $('#download-btn');
 
             function checkSelection() {
                 var val = $select.val();
+                // Wenn ein Wert da ist (nicht leer), Button anzeigen. Sonst verstecken.
                 if (val && val !== "") {
-                    // Aktivieren und Blau machen
-                    $btn.prop('disabled', false);
-                    $btn.removeClass('btn-default').addClass('btn-primary');
+                    $btn.show(); 
                 } else {
-                    // Deaktivieren und Grau machen
-                    $btn.prop('disabled', true);
-                    $btn.removeClass('btn-primary').addClass('btn-default');
+                    $btn.hide(); 
                 }
             }
 
-            // Wir hören auf 'change', 'input' und 'blur' für maximale Handy-Kompatibilität
+            // WICHTIG FÜR HANDY: Wir hören auf 'change' UND 'blur' (wenn das Auswahl-Rad zugeht)
             $select.on('change input blur', function() {
                 checkSelection();
             });
+
+            // Initiale Prüfung beim Laden
+            checkSelection();
 
             // Funktion für Push-Nachricht
             function sendPushNotification(fileName) {
@@ -221,9 +224,6 @@
 
             // Download & Push beim Klicken
             $btn.click(function() {
-                // Sicherheitscheck
-                if($(this).prop('disabled')) return;
-
                 var selectedValue = $select.val();
                 var selectedText = $("#documentId option:selected").text();
 
@@ -241,7 +241,7 @@
                 }
             });
 
-            // --- AUTO LOGOUT (1 Minute) ---
+            // --- AUTO LOGOUT ---
             var inactivityTime = function () {
                 var time;
                 window.onload = resetTimer;
@@ -256,7 +256,7 @@
 
                 function resetTimer() {
                     clearTimeout(time);
-                    time = setTimeout(logout, 60000); // 60000ms = 1 Minute
+                    time = setTimeout(logout, 60000); // 1 Minute
                 }
             };
             inactivityTime();
