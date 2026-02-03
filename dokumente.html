@@ -30,11 +30,29 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
     <style>
-        /* Navbar Fixes */
+        /* Fix für die Fußzeile: Das sorgt dafür, dass der Inhalt immer mindestens 
+           so hoch ist wie der Bildschirm, damit der Footer unten bleibt */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Der Hauptcontainer drückt den Footer nach unten */
+        #container-spacer {
+            flex: 1 0 auto;
+            min-height: auto; /* Reset falls nötig */
+        }
+        
+        /* Footer Einstellungen */
+        footer {
+            flex-shrink: 0;
+        }
+
         .navbar-nav > li > a { line-height: 20px !important; }
         .navbar { min-height: 50px !important; border: 1px solid transparent; margin-bottom: 20px; }
 
-        /* Dokumenten Label */
         .control-label {
             padding-top: 7px;
             margin-bottom: 0;
@@ -43,14 +61,13 @@
             color: #333;
         }
         
-        /* Button Style (Blau) */
         .btn-primary {
             background-color: #337ab7;
             border-color: #2e6da4;
             color: #fff;
         }
 
-        /* WICHTIG: Button ist standardmäßig NICHT SICHTBAR (wie im Original) */
+        /* Button ist standardmäßig NICHT SICHTBAR */
         #download-btn { display: none; }
     </style>
 
@@ -60,6 +77,7 @@
 </head>
 
 <body id="community-facelift">
+    
     <div id="container-spacer">
         <div class="community-facelift header-logo-box">
             <div class="container" style="overflow: hidden;">
@@ -107,7 +125,6 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="pull-left">
                 <div class="community-facelift btn-group btn-breadcrumb">
                     <a class="btn btn-default" href="dashboard.html">Startseite</a>
@@ -117,13 +134,12 @@
         </div>
 
         <div class="container">
-
             <form id="documentForm" class="form-horizontal" role="form" onsubmit="return false;">
                 
                 <div class="form-group">
                     <label for="documentId" class="col-sm-2 col-xs-12 control-label">Dokument</label>
                     <div class="col-sm-10 col-xs-12">
-                        <select class="form-control" name="documentId" id="documentId">
+                        <select class="form-control" name="documentId" id="documentId" onchange="checkDownload()">
                             <option value="" selected>Bitte wählen</option>
                             <option value="files/praesentation.pptx">PowerPoint Folie - PWA</option>
                             <option value="files/handout.pdf">Präsentation Handout - PWA</option>
@@ -132,9 +148,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-12">
-                        <br/>
-                    </div>
+                    <div class="col-xs-12"><br/></div>
                 </div>
 
                 <div class="row">
@@ -144,10 +158,9 @@
                         </button>
                     </div>
                 </div>
-
             </form>
-
-            <div style="height: 300px;"></div>
+            
+            <div style="height: 50px;"></div>
         </div>
     </div>
 
@@ -169,6 +182,18 @@
     </footer>
 
     <script>
+        // GLOBALE FUNKTION FÜR DAS HANDY (muss außerhalb von document.ready sein)
+        function checkDownload() {
+            var val = document.getElementById('documentId').value;
+            var btn = document.getElementById('download-btn');
+            
+            if (val && val !== "") {
+                btn.style.display = 'block'; // Anzeigen
+            } else {
+                btn.style.display = 'none';  // Verstecken
+            }
+        }
+
         $(document).ready(function() {
             // Service Worker
             if ('serviceWorker' in navigator) {
@@ -177,38 +202,20 @@
                 });
             }
 
-            // Benachrichtigungen Erlaubnis
+            // Benachrichtigungen
             if (Notification.permission !== "granted" && Notification.permission !== "denied") {
                 Notification.requestPermission();
             }
 
-            var $select = $('#documentId');
-            var $btn = $('#download-btn');
-
-            // --- FUNKTION: Button anzeigen oder verstecken ---
-            function checkSelection() {
-                var val = $select.val();
-                
-                if (val && val !== "") {
-                    // Etwas gewählt -> Button ZEIGEN (er ist blau definiert im CSS)
-                    $btn.show(); 
-                } else {
-                    // Nichts gewählt -> Button WEG (unsichtbar)
-                    $btn.hide(); 
-                }
-            }
-
-            // --- EVENT LISTENER (Handy & Desktop) ---
-            // 'change': Standard für Desktop
-            // 'input' & 'blur': Wichtig für Handys (Overlay/Rädchen)
-            $select.on('change input blur', function() {
-                checkSelection();
+            // Sicherung: Auch per jQuery hören
+            $('#documentId').on('change input blur keyup', function() {
+                checkDownload();
             });
 
-            // Initial einmal ausführen beim Laden
-            checkSelection();
+            // Initial prüfen
+            checkDownload();
 
-            // --- DOWNLOAD & PUSH LOGIK ---
+            // PUSH NACHRICHT
             function sendPushNotification(fileName) {
                 if (Notification.permission === "granted") {
                     navigator.serviceWorker.getRegistration().then(function(reg) {
@@ -227,8 +234,9 @@
                 }
             }
 
-            $btn.click(function() {
-                var selectedValue = $select.val();
+            // BUTTON KLICK
+            $('#download-btn').click(function() {
+                var selectedValue = $('#documentId').val();
                 var selectedText = $("#documentId option:selected").text();
 
                 if(selectedValue) {
@@ -245,14 +253,14 @@
                 }
             });
 
-            // --- AUTO LOGOUT (1 Minute) ---
+            // AUTO LOGOUT
             var inactivityTime = function () {
                 var time;
                 window.onload = resetTimer;
                 document.onmousemove = resetTimer;
                 document.onkeypress = resetTimer;
                 document.onclick = resetTimer;
-                document.ontouchstart = resetTimer; // Wichtig fürs Handy!
+                document.ontouchstart = resetTimer; 
 
                 function logout() {
                     window.location.href = 'index.html';
