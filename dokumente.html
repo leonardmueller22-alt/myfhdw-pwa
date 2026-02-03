@@ -30,8 +30,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
     <style>
-        /* Fix für die Fußzeile: Das sorgt dafür, dass der Inhalt immer mindestens 
-           so hoch ist wie der Bildschirm, damit der Footer unten bleibt */
+        /* Fix für die Fußzeile (Sticky Footer) */
         html, body {
             height: 100%;
             margin: 0;
@@ -39,13 +38,11 @@
             flex-direction: column;
         }
         
-        /* Der Hauptcontainer drückt den Footer nach unten */
         #container-spacer {
             flex: 1 0 auto;
-            min-height: auto; /* Reset falls nötig */
+            min-height: auto;
         }
         
-        /* Footer Einstellungen */
         footer {
             flex-shrink: 0;
         }
@@ -182,15 +179,15 @@
     </footer>
 
     <script>
-        // GLOBALE FUNKTION FÜR DAS HANDY (muss außerhalb von document.ready sein)
+        // GLOBALE FUNKTION (für onchange im HTML)
         function checkDownload() {
             var val = document.getElementById('documentId').value;
             var btn = document.getElementById('download-btn');
             
             if (val && val !== "") {
-                btn.style.display = 'block'; // Anzeigen
+                btn.style.display = 'block'; 
             } else {
-                btn.style.display = 'none';  // Verstecken
+                btn.style.display = 'none'; 
             }
         }
 
@@ -207,7 +204,7 @@
                 Notification.requestPermission();
             }
 
-            // Sicherung: Auch per jQuery hören
+            // jQuery Listener als Sicherung
             $('#documentId').on('change input blur keyup', function() {
                 checkDownload();
             });
@@ -215,7 +212,6 @@
             // Initial prüfen
             checkDownload();
 
-            // PUSH NACHRICHT
             function sendPushNotification(fileName) {
                 if (Notification.permission === "granted") {
                     navigator.serviceWorker.getRegistration().then(function(reg) {
@@ -234,7 +230,7 @@
                 }
             }
 
-            // BUTTON KLICK
+            // BUTTON KLICK MIT HANDY-FIX (target="_blank")
             $('#download-btn').click(function() {
                 var selectedValue = $('#documentId').val();
                 var selectedText = $("#documentId option:selected").text();
@@ -242,6 +238,11 @@
                 if(selectedValue) {
                     var link = document.createElement('a');
                     link.href = selectedValue;
+                    
+                    // --- HANDY FIX: Öffnet neuen Tab statt verstecktem Download ---
+                    // Das umgeht oft die Blockade auf iPhones/Android
+                    link.target = "_blank"; 
+                    
                     link.download = selectedValue.split('/').pop();
                     document.body.appendChild(link);
                     link.click();
