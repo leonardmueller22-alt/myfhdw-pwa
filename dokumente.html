@@ -48,9 +48,6 @@
             border-color: #2e6da4;
             color: #fff;
         }
-        
-        /* Button initial verstecken */
-        #download-btn { display: none; }
     </style>
 
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/js/jquery-2.2.4.min.js"></script>
@@ -138,7 +135,7 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <button id="download-btn" class="btn btn-default btn-primary pull-right">
+                        <button id="download-btn" class="btn btn-default pull-right" disabled>
                             Herunterladen
                         </button>
                     </div>
@@ -169,61 +166,68 @@
 
     <script>
         $(document).ready(function() {
-            // Service Worker registrieren (Wichtig für PWA und Push)
+            // Service Worker registrieren
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function() {
                     navigator.serviceWorker.register('sw.js');
                 });
             }
 
-            // Benachrichtigungen erlauben (Fragt den Nutzer beim Laden der Seite)
+            // Benachrichtigungen erlauben
             if (Notification.permission !== "granted" && Notification.permission !== "denied") {
                 Notification.requestPermission();
             }
 
-            // 1. Button nur anzeigen, wenn etwas ausgewählt wurde
-            $('#documentId').change(function() {
-                var selectedValue = $(this).val();
-                if (selectedValue && selectedValue !== "") {
-                    $('#download-btn').show(); // Button einblenden
+            // --- NEUE LOGIK FÜR DAS HANDY ---
+            var $select = $('#documentId');
+            var $btn = $('#download-btn');
+
+            function checkSelection() {
+                var val = $select.val();
+                if (val && val !== "") {
+                    // Aktivieren und Blau machen
+                    $btn.prop('disabled', false);
+                    $btn.removeClass('btn-default').addClass('btn-primary');
                 } else {
-                    $('#download-btn').hide(); // Button ausblenden
+                    // Deaktivieren und Grau machen
+                    $btn.prop('disabled', true);
+                    $btn.removeClass('btn-primary').addClass('btn-default');
                 }
+            }
+
+            // Wir hören auf 'change', 'input' und 'blur' für maximale Handy-Kompatibilität
+            $select.on('change input blur', function() {
+                checkSelection();
             });
 
-            // 2. Funktion für Push-Nachricht
+            // Funktion für Push-Nachricht
             function sendPushNotification(fileName) {
                 if (Notification.permission === "granted") {
                     navigator.serviceWorker.getRegistration().then(function(reg) {
                         var options = {
                             body: fileName + ' wurde erfolgreich heruntergeladen.',
-                            icon: 'img/homescreen192.png', // Dein App Icon
+                            icon: 'img/homescreen192.png',
                             vibrate: [100, 50, 100],
-                            data: {
-                                dateOfArrival: Date.now()
-                            }
+                            data: { dateOfArrival: Date.now() }
                         };
-                        // Wenn Service Worker aktiv, nutze ihn (besser für Android)
                         if (reg) {
                             reg.showNotification('Download abgeschlossen', options);
                         } else {
-                            // Fallback für Desktop
                             new Notification('Download abgeschlossen', options);
                         }
                     });
-                } else {
-                    // Falls Erlaubnis noch fehlt, jetzt fragen
-                    Notification.requestPermission();
                 }
             }
 
-            // 3. Download & Push beim Klicken
-            $('#download-btn').click(function() {
-                var selectedValue = $('#documentId').val(); // Der Pfad (z.B. files/....pptx)
-                var selectedText = $("#documentId option:selected").text(); // Der Name (z.B. PowerPoint Folie - PWA)
+            // Download & Push beim Klicken
+            $btn.click(function() {
+                // Sicherheitscheck
+                if($(this).prop('disabled')) return;
+
+                var selectedValue = $select.val();
+                var selectedText = $("#documentId option:selected").text();
 
                 if(selectedValue) {
-                    // A) Download starten
                     var link = document.createElement('a');
                     link.href = selectedValue;
                     link.download = selectedValue.split('/').pop();
@@ -231,29 +235,31 @@
                     link.click();
                     document.body.removeChild(link);
 
-                    // B) Push Nachricht senden (kleine Verzögerung wirkt natürlicher)
                     setTimeout(function() {
                         sendPushNotification(selectedText);
                     }, 500);
                 }
             });
+
+            // --- AUTO LOGOUT (1 Minute) ---
             var inactivityTime = function () {
-            var time;
-            window.onload = resetTimer;
-            document.onmousemove = resetTimer;
-            document.onkeypress = resetTimer;
-            document.onclick = resetTimer;
+                var time;
+                window.onload = resetTimer;
+                document.onmousemove = resetTimer;
+                document.onkeypress = resetTimer;
+                document.onclick = resetTimer;
+                document.ontouchstart = resetTimer; // WICHTIG FÜR HANDY!
 
-            function logout() {
-                window.location.href = 'index.html';
-            }
+                function logout() {
+                    window.location.href = 'index.html';
+                }
 
-            function resetTimer() {
-                clearTimeout(time);
-                time = setTimeout(logout, 300000); 
-            }
-        };
-        inactivityTime();
+                function resetTimer() {
+                    clearTimeout(time);
+                    time = setTimeout(logout, 60000); // 60000ms = 1 Minute
+                }
+            };
+            inactivityTime();
         });
     </script>
 </body>
