@@ -1,4 +1,4 @@
-const CACHE_NAME = 'myfhdw-pwa-v39'; // <--- Version auf 36 erhöht!
+const CACHE_NAME = 'myfhdw-pwa-v55'; // <--- Version auf 36 erhöht!
 
 const urlsToCache = [
   // --- Deine lokalen Dateien ---
