@@ -1,4 +1,4 @@
-const CACHE_NAME = 'myfhdw-pwa-v35'; // <--- Version erhöht
+const CACHE_NAME = 'myfhdw-pwa-v36'; // <--- Version auf 36 erhöht!
 
 const urlsToCache = [
   // --- Deine lokalen Dateien ---
@@ -11,15 +11,19 @@ const urlsToCache = [
   './timetable.html',
   './dokumente.html',
   './abgaben.html',
-  './kurzbewerbung.html',      // <--- Hinzugefügt
+  './kurzbewerbung.html',
   './manifest.json',
   './styles/custom.css',
   './img/homescreen192.png',
   './img/Community_Banner.jpg',
   './img/team.png',
-  './img/gorilla.jpg',         // <--- Hinzugefügt (WICHTIG!)
+  './img/gorilla.jpg',
   './favicon.ico',
   './jscripts/getNotifications.js',
+
+  // --- HIER SIND DIE NEUEN DATEIEN (bitte im Ordner 'files' umbenennen!) ---
+  './files/handout.pdf',
+  './files/praesentation.pptx',
 
   // --- WICHTIG: Externe Bibliotheken (CDN), damit es offline hübsch bleibt ---
   // jQuery & Bootstrap
