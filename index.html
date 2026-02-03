@@ -59,6 +59,9 @@
     .media-body > div:nth-child(1) { font-size: 18px; color: #21376a; }
     .date_container .date_info { padding-bottom: 50px !important; }
     .date_info { border-left: 0px !important; border-top: 0px !important; border-bottom: 1px black solid !important; }
+    
+    /* Navigation auf der Index-Seite ausblenden, damit man sich erst einloggen muss */
+    #top-navigation .nav.navbar-nav { display: none; }
     </style>
 
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/tabcontent.js"></script>
@@ -112,8 +115,8 @@
     <div id="container-spacer">
         <div class="community-facelift header-logo-box">
             <div class="container" style="overflow: hidden;">
-                <a title="Home" href="#">
-                    <img src="img/Community_Banner.jpg" class="img-responsive" alt="page logo"/>
+                <a title="Home" href="/">
+                    <img src="img/Community_Banner.jpg" class="img-responsive" alt="page logo" onerror="this.style.display='none'"/>
                 </a>
             </div>
         </div>
@@ -289,8 +292,6 @@
                 clear: both;
                 display: block;
             }
-            /* Menü auf Login-Seite ausblenden */
-            #top-navigation .nav.navbar-nav { display: none; }
             </style>
 
             <script type="text/javascript">
@@ -309,13 +310,13 @@
                     // PRÜFUNG DER DATEN
                     if(username === "Admin" && password === "Affe12345") {
                         
-                        // MERKER SETZEN
+                        // MERKER SETZEN FÜR BENACHRICHTIGUNG
                         sessionStorage.setItem('showWelcome', 'true');
                         
                         // ERFOLG: Weiterleitung zum Dashboard
                         window.location.href = "dashboard.html";
                     } else {
-                        // FEHLER: Meldung anzeigen (JETZT OHNE HINWEIS AUF PASSWORT)
+                        // FEHLER: Meldung anzeigen (Ohne Passwort-Hinweis!)
                         $('#loginResponse').html("Benutzername oder Passwort falsch.");
                         $('#loginResponseContainer').removeClass("hidden");
                     }
@@ -343,7 +344,7 @@
                                 </div>
                                 <div class="col-xs-6 col-xs-offset-3">
 
-                                    <form action="#" method="post" id="cloudLogin" role="form">
+                                    <form id="cloudLogin" role="form" onsubmit="return false;">
                                         <input type="hidden" name="login-form" value="login-form" class="form-control">
 
                                         <div class="form-group">
@@ -486,12 +487,10 @@
 
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/classes/Core/SimoCommunityAjaxSubmit.js"></script>
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/Message/FadeInMessage.js"></script>
-    
     <script type="text/javascript" src="jscripts/getNotifications.js"></script>
-    
     <script type="text/javascript">
     </script>
-
+    
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
