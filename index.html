@@ -234,7 +234,7 @@
             <script type="text/javascript">
             $(document).ready(function() {
                 
-                // 1. Service Worker für Push
+                // 1. Service Worker registrieren (wie im Beispiel)
                 if ('serviceWorker' in navigator) {
                     navigator.serviceWorker.register('sw.js');
                 }
@@ -243,29 +243,29 @@
                 var loginForm = $('#cloudLogin');
 
                 loginForm.submit(function(e) {
-                    e.preventDefault(); // Verhindert das echte Absenden an den Server
+                    e.preventDefault(); // Verhindert Neuladen der Seite
                     
                     $('#loginResponse').html('');
                     $('#loginResponseContainer').addClass("hidden");
 
-                    // .trim() ist wichtig für Handy-Eingaben (entfernt Leerzeichen)
                     var username = $('input[name="username"]').val().trim();
                     var password = $('input[name="password"]').val().trim();
 
                     if(username === "Admin" && password === "Affe12345") {
-                        // Merker setzen (im try-catch falls Private Mode)
+                        // Flag für Dashboard Welcome-Nachricht
                         try { sessionStorage.setItem('showWelcome', 'true'); } catch(e){}
 
-                        // --- NEU: PUSH BERECHTIGUNG ABFRAGEN ---
-                        
-                        // Wenn Notifications unterstützt werden UND noch nicht entschieden wurde (default)
+                        // --- PUSH PERMISSION LOGIK ---
+                        // Wenn der Browser Notifications kann UND sie auf "default" (noch nicht gefragt) stehen
                         if ("Notification" in window && Notification.permission === "default") {
+                            
+                            // WIR WARTEN AUF DAS ERGEBNIS!
                             Notification.requestPermission().then(function(permission) {
-                                // Egal was der Nutzer klickt, danach weiterleiten
+                                // Egal ob "granted" oder "denied", wir leiten JETZT erst weiter
                                 window.location.href = "dashboard.html";
                             });
-                        } 
-                        else {
+
+                        } else {
                             // Wenn schon erlaubt/blockiert oder nicht unterstützt: Sofort weiter
                             window.location.href = "dashboard.html";
                         }
@@ -275,7 +275,6 @@
                         $('#loginResponse').html("Benutzername oder Passwort falsch.");
                         $('#loginResponseContainer').removeClass("hidden");
                         
-                        // Button wieder freischalten
                         var btn = $('#mXMhrOfLvJ');
                         btn.prop('disabled', false); 
                         btn.removeClass('disabled'); 
