@@ -1,4 +1,4 @@
-const CACHE_NAME = 'myfhdw-pwa-v85'; // Version auf v85 erhöht für das Handy-Update
+const CACHE_NAME = 'myfhdw-pwa-v88'; // Version auf v88 erhöht
 
 const urlsToCache = [
   './',
@@ -68,10 +68,9 @@ self.addEventListener('fetch', function(event) {
   );
 });
 
-// WICHTIG: Dieser Teil verarbeitet die Benachrichtigungsanfragen auf dem Handy
+// Listener für Push-Events (Server)
 self.addEventListener('push', function(event) {
   let data = { title: 'MyFHDW', body: 'Neue Nachricht!' };
-  
   if (event.data) {
     try {
       data = event.data.json();
@@ -79,17 +78,27 @@ self.addEventListener('push', function(event) {
       data = { title: 'MyFHDW', body: event.data.text() };
     }
   }
-
   const options = {
     body: data.body,
     icon: 'img/homescreen192.png',
     badge: 'img/homescreen192.png',
     vibrate: [100, 50, 100]
   };
+  event.waitUntil(self.registration.showNotification(data.title, options));
+});
 
-  event.waitUntil(
-    self.registration.showNotification(data.title, options)
-  );
+// NEU: Message Listener (Empfängt Befehle von der Webseite/abgaben.html)
+self.addEventListener('message', function(event) {
+  if (event.data && event.data.type === 'SEND_NOTIFICATION') {
+    const options = {
+      body: event.data.body,
+      icon: 'img/homescreen192.png',
+      badge: 'img/homescreen192.png',
+      vibrate: [100, 50, 100]
+    };
+    // Der Service Worker selbst zeigt die Nachricht an
+    self.registration.showNotification(event.data.title, options);
+  }
 });
 
 self.addEventListener('notificationclick', function(event) {
