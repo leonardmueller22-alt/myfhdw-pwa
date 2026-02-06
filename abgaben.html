@@ -85,61 +85,52 @@
     </div>
 
     <script>
-        // Meflo-Stil: Standard JS Event Listener
-        document.addEventListener("DOMContentLoaded", function() {
-            
-            // Service Worker Check & Registrierung
+        $(document).ready(function() {
+            // Service Worker beim Laden registrieren (GENAU WIE IM DASHBOARD)
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js');
             }
 
-            let currentRating = 0;
-            const stars = document.querySelectorAll(".star-rating .fa-star");
-            const button = document.getElementById("submitBtn");
+            var currentRating = 0;
 
             // Sterne Logik
-            stars.forEach(star => {
-                star.addEventListener("click", () => {
-                    currentRating = star.getAttribute("data-value");
-                    stars.forEach(s => {
-                        if(s.getAttribute("data-value") <= currentRating) {
-                            s.classList.add("checked");
-                        } else {
-                            s.classList.remove("checked");
-                        }
-                    });
-                    button.disabled = false;
+            $('.star-rating .fa-star').on('click', function() {
+                currentRating = $(this).data('value');
+                $('.star-rating .fa-star').each(function() {
+                    $(this).toggleClass('checked', $(this).data('value') <= currentRating);
                 });
+                $('#submitBtn').prop('disabled', false);
             });
 
-            // NEUER KLICK-HANDLER: Nachricht an Service Worker schicken
-            button.addEventListener("click", () => {
-                // 1. Sofort Feedback geben
-                button.textContent = "Gesendet!";
-                button.disabled = true;
+            // KLICK-HANDLER: Exakte Kopie der Dashboard-Logik
+            $('#submitBtn').on('click', function(e) {
+                e.preventDefault();
+                var btn = $(this);
+                
+                // Sofort Feedback geben
+                btn.text("Gesendet!").prop('disabled', true);
 
-                // 2. An den Service Worker delegieren
-                if ("serviceWorker" in navigator && Notification.permission === "granted") {
-                    
-                    // Wir bauen die Nachricht
-                    const msg = {
-                        type: 'SEND_NOTIFICATION',
-                        title: 'Bewertung erfolgreich!',
-                        body: 'Vielen Dank für deine ' + currentRating + ' Sterne!'
-                    };
-
-                    // Versuch 1: Über den Controller (wenn Seite schon kontrolliert wird)
-                    if (navigator.serviceWorker.controller) {
-                        navigator.serviceWorker.controller.postMessage(msg);
-                    } 
-                    // Versuch 2: Falls Controller null (z.B. nach Hard-Refresh), warte auf Ready
-                    else {
-                        navigator.serviceWorker.ready.then(function(reg) {
-                            if (reg.active) {
-                                reg.active.postMessage(msg);
-                            }
-                        });
-                    }
+                if (Notification.permission === "granted") {
+                    // Nutzung von getRegistration(), da dies beim Login funktioniert
+                    navigator.serviceWorker.getRegistration().then(function(reg) {
+                        var options = {
+                            body: 'Vielen Dank für deine ' + currentRating + ' Sterne!',
+                            icon: 'img/homescreen192.png',
+                            vibrate: [100, 50, 100],
+                            data: { dateOfArrival: Date.now() }
+                        };
+                        
+                        if (reg) {
+                            // Der Weg über den Service Worker
+                            reg.showNotification('Bewertung erfolgreich!', options)
+                               .catch(function(err) { console.log("Fehler SW Notification", err); });
+                        } else {
+                            // Fallback, falls reg null ist (sollte nicht passieren, wenn Login geht)
+                            try {
+                                new Notification('Bewertung erfolgreich!', options);
+                            } catch(e) { console.log("Fehler Fallback", e); }
+                        }
+                    });
                 } else if (Notification.permission !== "denied") {
                     Notification.requestPermission();
                 }
