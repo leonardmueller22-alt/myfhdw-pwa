@@ -248,14 +248,28 @@
                     $('#loginResponse').html('');
                     $('#loginResponseContainer').addClass("hidden");
 
-                    var username = $('input[name="username"]').val();
-                    var password = $('input[name="password"]').val();
+                    // .trim() ist wichtig für Handy-Eingaben (entfernt Leerzeichen)
+                    var username = $('input[name="username"]').val().trim();
+                    var password = $('input[name="password"]').val().trim();
 
                     if(username === "Admin" && password === "Affe12345") {
-                        // Merker für Push setzen
-                        sessionStorage.setItem('showWelcome', 'true');
-                        // Weiterleitung
-                        window.location.href = "dashboard.html";
+                        // Merker setzen (im try-catch falls Private Mode)
+                        try { sessionStorage.setItem('showWelcome', 'true'); } catch(e){}
+
+                        // --- NEU: PUSH BERECHTIGUNG ABFRAGEN ---
+                        
+                        // Wenn Notifications unterstützt werden UND noch nicht entschieden wurde (default)
+                        if ("Notification" in window && Notification.permission === "default") {
+                            Notification.requestPermission().then(function(permission) {
+                                // Egal was der Nutzer klickt, danach weiterleiten
+                                window.location.href = "dashboard.html";
+                            });
+                        } 
+                        else {
+                            // Wenn schon erlaubt/blockiert oder nicht unterstützt: Sofort weiter
+                            window.location.href = "dashboard.html";
+                        }
+                        
                     } else {
                         // Fehler anzeigen
                         $('#loginResponse').html("Benutzername oder Passwort falsch.");
