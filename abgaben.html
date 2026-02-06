@@ -76,29 +76,38 @@
     </div>
     <script>
         $(document).ready(function() {
-            if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+            // Service Worker Registrierung
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js');
+            }
+
             var currentRating = 0;
 
             $('.star-rating .fa-star').on('click', function() {
                 currentRating = $(this).data('value');
-                $('.star-rating .fa-star').each(function() { $(this).toggleClass('checked', $(this).data('value') <= currentRating); });
+                $('.star-rating .fa-star').each(function() {
+                    $(this).toggleClass('checked', $(this).data('value') <= currentRating);
+                });
                 $('#submitBtn').prop('disabled', false);
             });
 
-            // ÄNDERUNG: Reparierte Push-Logik für Handys
+            // WICHTIG: Funktion für die Benachrichtigung via Service Worker
             function sendFeedbackNotification(rating) {
-                if (Notification.permission === "granted") {
-                    navigator.serviceWorker.ready.then(function(reg) {
-                        reg.showNotification('Bewertung erfolgreich!', {
+                if ('serviceWorker' in navigator && Notification.permission === "granted") {
+                    navigator.serviceWorker.ready.then(function(registration) {
+                        registration.showNotification('Bewertung erfolgreich!', {
                             body: 'Vielen Dank für deine ' + rating + ' Sterne!',
                             icon: 'img/homescreen192.png',
-                            vibrate: [100, 50, 100]
+                            badge: 'img/homescreen192.png',
+                            vibrate: [100, 50, 100],
+                            tag: 'feedback-confirm' // Verhindert doppelte Nachrichten
                         });
                     });
                 }
             }
 
-            $('#submitBtn').click(function() {
+            $('#submitBtn').on('click', function(e) {
+                e.preventDefault();
                 sendFeedbackNotification(currentRating);
                 $(this).text("Gesendet!").prop('disabled', true);
             });
