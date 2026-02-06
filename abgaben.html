@@ -8,6 +8,7 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#21376a">
     <link rel="apple-touch-icon" href="img/homescreen192.png">
+    
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/style.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/vorlage.css" type="text/css"/>
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/fontawesome/css/all.min.css" type="text/css"/>
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/content.css" type="text/css"/>
     <link rel="stylesheet" href="styles/custom.css" type="text/css" media="all"/>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    
     <style>
         .navbar-nav > li > a { line-height: 20px !important; }
         .navbar { min-height: 50px !important; border: 1px solid transparent; margin-bottom: 20px; }
@@ -28,6 +30,7 @@
         .btn-submit:hover { background-color: #1a2b55; color: #fff; }
         .btn-submit:disabled { background-color: #eee; border-color: #ddd; color: #999; cursor: not-allowed; }
     </style>
+    
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap.min.js"></script>
 </head>
@@ -35,13 +38,17 @@
     <div id="container-spacer">
         <div class="community-facelift header-logo-box">
             <div class="container" style="overflow: hidden;">
-                <a title="Home" href="dashboard.html"><img src="img/Community_Banner.jpg" class="img-responsive" alt="page logo"/></a>
+                <a title="Home" href="dashboard.html">
+                    <img src="img/Community_Banner.jpg" class="img-responsive" alt="page logo"/>
+                </a>
             </div>
         </div>
         <nav role="navigation" id="top-navigation" class="navbar navbar-default community-facelift">
             <div class="container">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-id"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-id">
+                        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
                     <a href="dashboard.html" class="navbar-brand"><span class="glyphicon glyphicon-home"></span></a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-id">
@@ -63,9 +70,11 @@
                     <div class="feedback-container">
                         <h2 class="feedback-title">Wir würden uns über eine Bewertung freuen</h2>
                         <div class="star-rating" id="starRating">
-                            <span class="fa fa-star" data-value="1"></span><span class="fa fa-star" data-value="2"></span><span class="fa fa-star" data-value="3"></span><span class="fa fa-star" data-value="4"></span><span class="fa fa-star" data-value="5"></span>
+                            <span class="fa fa-star" data-value="1"></span><span class="fa fa-star" data-value="2"></span>
+                            <span class="fa fa-star" data-value="3"></span><span class="fa fa-star" data-value="4"></span>
+                            <span class="fa fa-star" data-value="5"></span>
                         </div>
-                        <form id="feedbackForm">
+                        <form id="feedbackForm" onsubmit="return false;">
                             <textarea class="form-control" rows="4" placeholder="Kommentar..." id="feedbackText"></textarea>
                             <button id="submitBtn" type="button" class="btn btn-submit" disabled>Abschicken</button>
                         </form>
@@ -74,11 +83,19 @@
             </div>
         </div>
     </div>
+
     <script>
         $(document).ready(function() {
+            // Service Worker Registrierung (identisch zum Dashboard)
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('sw.js');
+                });
+            }
+
             var currentRating = 0;
 
-            // Sterne Logik
+            // Sterne-Logik
             $('.star-rating .fa-star').on('click', function() {
                 currentRating = $(this).data('value');
                 $('.star-rating .fa-star').each(function() {
@@ -87,37 +104,59 @@
                 $('#submitBtn').prop('disabled', false);
             });
 
-            // Der eigentliche Fix für den Klick am Handy
-            $('#submitBtn').on('click', function() {
+            // Klick-Handler mit "Dashboard-Logik"
+            $('#submitBtn').on('click', function(e) {
+                e.preventDefault();
                 var btn = $(this);
-                btn.text("Verarbeite...").prop('disabled', true);
 
-                // 1. Prüfen, ob Benachrichtigungen erlaubt sind
-                if (Notification.permission !== "granted") {
-                    alert("Bitte erlaube Mitteilungen in den Einstellungen deines Handys für diese App.");
-                    btn.text("Abschicken").prop('disabled', false);
-                    return;
+                // Funktion zum Senden
+                function doSendNotification() {
+                    if ('serviceWorker' in navigator) {
+                        // WICHTIG: getRegistration statt ready nutzen (wie im Dashboard)
+                        navigator.serviceWorker.getRegistration().then(function(reg) {
+                            var options = {
+                                body: 'Vielen Dank für deine ' + currentRating + ' Sterne!',
+                                icon: 'img/homescreen192.png',
+                                vibrate: [100, 50, 100], // Vibration wieder an, da es beim Login klappt
+                                tag: 'feedback-' + Date.now()
+                            };
+
+                            if (reg) {
+                                // Versuche es über den Service Worker
+                                reg.showNotification('Bewertung erfolgreich!', options)
+                                    .then(function() {
+                                        btn.text("Gesendet!").prop('disabled', true);
+                                    })
+                                    .catch(function(err) {
+                                        // Falls SW fehlschlägt, Alert
+                                        alert("Fehler beim Senden: " + err);
+                                    });
+                            } else {
+                                // Fallback: Normale Notification (falls SW nicht greift)
+                                try {
+                                    new Notification('Bewertung erfolgreich!', options);
+                                    btn.text("Gesendet!").prop('disabled', true);
+                                } catch (err) {
+                                    alert("Service Worker nicht gefunden und Fallback fehlgeschlagen.");
+                                }
+                            }
+                        });
+                    }
                 }
 
-                // 2. Über den Service Worker senden
-                if ('serviceWorker' in navigator) {
-                    navigator.serviceWorker.ready.then(function(registration) {
-                        registration.showNotification('Bewertung erfolgreich!', {
-                            body: 'Vielen Dank für deine ' + currentRating + ' Sterne!',
-                            icon: 'img/homescreen192.png',
-                            badge: 'img/homescreen192.png',
-                            vibrate: [100, 50, 100],
-                            tag: 'feedback-notification'
-                        });
-                        btn.text("Gesendet!");
-                    }).catch(function(err) {
-                        console.error("Service Worker Error:", err);
-                        alert("Fehler beim Senden der Benachrichtigung.");
-                        btn.text("Abschicken").prop('disabled', false);
+                // Berechtigungs-Prüfung
+                if (Notification.permission === "granted") {
+                    doSendNotification();
+                } else if (Notification.permission !== "denied") {
+                    Notification.requestPermission().then(function(permission) {
+                        if (permission === "granted") {
+                            doSendNotification();
+                        } else {
+                            alert("Benachrichtigungen wurden nicht erlaubt.");
+                        }
                     });
                 } else {
-                    alert("Service Worker nicht unterstützt.");
-                    btn.text("Abschicken").prop('disabled', false);
+                    alert("Benachrichtigungen sind blockiert.");
                 }
             });
         });
