@@ -1,4 +1,4 @@
-const CACHE_NAME = 'myfhdw-pwa-v81'; // Version erhöht für Update
+const CACHE_NAME = 'myfhdw-pwa-v85'; // Version auf v85 erhöht für das Handy-Update
 
 const urlsToCache = [
   './',
@@ -68,16 +68,28 @@ self.addEventListener('fetch', function(event) {
   );
 });
 
-// NEU: Listener für Push-Events vom System (Wichtig für Mobile)
+// WICHTIG: Dieser Teil verarbeitet die Benachrichtigungsanfragen auf dem Handy
 self.addEventListener('push', function(event) {
-  const data = event.data ? event.data.json() : { title: 'MyFHDW', body: 'Neue Nachricht!' };
+  let data = { title: 'MyFHDW', body: 'Neue Nachricht!' };
+  
+  if (event.data) {
+    try {
+      data = event.data.json();
+    } catch (e) {
+      data = { title: 'MyFHDW', body: event.data.text() };
+    }
+  }
+
   const options = {
     body: data.body,
     icon: 'img/homescreen192.png',
     badge: 'img/homescreen192.png',
     vibrate: [100, 50, 100]
   };
-  event.waitUntil(self.registration.showNotification(data.title, options));
+
+  event.waitUntil(
+    self.registration.showNotification(data.title, options)
+  );
 });
 
 self.addEventListener('notificationclick', function(event) {
