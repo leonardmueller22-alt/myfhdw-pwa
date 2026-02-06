@@ -76,7 +76,7 @@
                         </div>
                         <form id="feedbackForm" onsubmit="return false;">
                             <textarea class="form-control" rows="4" placeholder="Kommentar..." id="feedbackText"></textarea>
-                            <button id="submitBtn" type="button" class="btn btn-submit" disabled>Abschicken</button>
+                            <button id="submitBtn" class="btn btn-submit" disabled>Abschicken</button>
                         </form>
                     </div>
                 </div>
@@ -85,78 +85,58 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            // Service Worker Registrierung (identisch zum Dashboard)
+        // Wir nutzen Standard JS Event Listener für maximale Kompatibilität wie im Meflo-Beispiel
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // Service Worker Check
             if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                    navigator.serviceWorker.register('sw.js');
-                });
+                navigator.serviceWorker.register('sw.js');
             }
 
-            var currentRating = 0;
+            let currentRating = 0;
+            const stars = document.querySelectorAll(".star-rating .fa-star");
+            const button = document.getElementById("submitBtn");
 
-            // Sterne-Logik
-            $('.star-rating .fa-star').on('click', function() {
-                currentRating = $(this).data('value');
-                $('.star-rating .fa-star').each(function() {
-                    $(this).toggleClass('checked', $(this).data('value') <= currentRating);
-                });
-                $('#submitBtn').prop('disabled', false);
-            });
-
-            // Klick-Handler mit "Dashboard-Logik"
-            $('#submitBtn').on('click', function(e) {
-                e.preventDefault();
-                var btn = $(this);
-
-                // Funktion zum Senden
-                function doSendNotification() {
-                    if ('serviceWorker' in navigator) {
-                        // WICHTIG: getRegistration statt ready nutzen (wie im Dashboard)
-                        navigator.serviceWorker.getRegistration().then(function(reg) {
-                            var options = {
-                                body: 'Vielen Dank für deine ' + currentRating + ' Sterne!',
-                                icon: 'img/homescreen192.png',
-                                vibrate: [100, 50, 100], // Vibration wieder an, da es beim Login klappt
-                                tag: 'feedback-' + Date.now()
-                            };
-
-                            if (reg) {
-                                // Versuche es über den Service Worker
-                                reg.showNotification('Bewertung erfolgreich!', options)
-                                    .then(function() {
-                                        btn.text("Gesendet!").prop('disabled', true);
-                                    })
-                                    .catch(function(err) {
-                                        // Falls SW fehlschlägt, Alert
-                                        alert("Fehler beim Senden: " + err);
-                                    });
-                            } else {
-                                // Fallback: Normale Notification (falls SW nicht greift)
-                                try {
-                                    new Notification('Bewertung erfolgreich!', options);
-                                    btn.text("Gesendet!").prop('disabled', true);
-                                } catch (err) {
-                                    alert("Service Worker nicht gefunden und Fallback fehlgeschlagen.");
-                                }
-                            }
-                        });
-                    }
-                }
-
-                // Berechtigungs-Prüfung
-                if (Notification.permission === "granted") {
-                    doSendNotification();
-                } else if (Notification.permission !== "denied") {
-                    Notification.requestPermission().then(function(permission) {
-                        if (permission === "granted") {
-                            doSendNotification();
+            // Sterne Logik
+            stars.forEach(star => {
+                star.addEventListener("click", () => {
+                    currentRating = star.getAttribute("data-value");
+                    stars.forEach(s => {
+                        if(s.getAttribute("data-value") <= currentRating) {
+                            s.classList.add("checked");
                         } else {
-                            alert("Benachrichtigungen wurden nicht erlaubt.");
+                            s.classList.remove("checked");
                         }
                     });
-                } else {
-                    alert("Benachrichtigungen sind blockiert.");
+                    button.disabled = false;
+                });
+            });
+
+            // DIE NEUE LOGIK (async/await wie bei Meflo)
+            button.addEventListener("click", async () => {
+                
+                // 1. Optisches Feedback sofort geben
+                button.textContent = "Gesendet!";
+                button.disabled = true;
+
+                // 2. Benachrichtigung senden
+                if ("serviceWorker" in navigator && Notification.permission === "granted") {
+                    try {
+                        // WARTEN bis der Service Worker bereit ist (das ist der Trick!)
+                        const reg = await navigator.serviceWorker.ready;
+                        
+                        // Nachricht anzeigen
+                        reg.showNotification("Bewertung erfolgreich!", {
+                            body: "Vielen Dank für deine " + currentRating + " Sterne!",
+                            icon: "img/homescreen192.png",
+                            vibrate: [100, 50, 100]
+                        });
+                    } catch (err) {
+                        console.error("Fehler beim Senden:", err);
+                    }
+                } else if (Notification.permission !== "denied") {
+                    // Falls noch keine Rechte da sind, fragen
+                    Notification.requestPermission();
                 }
             });
         });
