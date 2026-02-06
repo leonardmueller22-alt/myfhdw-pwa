@@ -65,9 +65,9 @@
                         <div class="star-rating" id="starRating">
                             <span class="fa fa-star" data-value="1"></span><span class="fa fa-star" data-value="2"></span><span class="fa fa-star" data-value="3"></span><span class="fa fa-star" data-value="4"></span><span class="fa fa-star" data-value="5"></span>
                         </div>
-                        <form onsubmit="return false;">
+                        <form id="feedbackForm">
                             <textarea class="form-control" rows="4" placeholder="Kommentar..." id="feedbackText"></textarea>
-                            <button id="submitBtn" class="btn btn-submit" disabled>Abschicken</button>
+                            <button id="submitBtn" type="button" class="btn btn-submit" disabled>Abschicken</button>
                         </form>
                     </div>
                 </div>
@@ -76,13 +76,9 @@
     </div>
     <script>
         $(document).ready(function() {
-            // Service Worker Registrierung
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('sw.js');
-            }
-
             var currentRating = 0;
 
+            // Sterne Logik
             $('.star-rating .fa-star').on('click', function() {
                 currentRating = $(this).data('value');
                 $('.star-rating .fa-star').each(function() {
@@ -91,25 +87,38 @@
                 $('#submitBtn').prop('disabled', false);
             });
 
-            // WICHTIG: Funktion für die Benachrichtigung via Service Worker
-            function sendFeedbackNotification(rating) {
-                if ('serviceWorker' in navigator && Notification.permission === "granted") {
+            // Der eigentliche Fix für den Klick am Handy
+            $('#submitBtn').on('click', function() {
+                var btn = $(this);
+                btn.text("Verarbeite...").prop('disabled', true);
+
+                // 1. Prüfen, ob Benachrichtigungen erlaubt sind
+                if (Notification.permission !== "granted") {
+                    alert("Bitte erlaube Mitteilungen in den Einstellungen deines Handys für diese App.");
+                    btn.text("Abschicken").prop('disabled', false);
+                    return;
+                }
+
+                // 2. Über den Service Worker senden
+                if ('serviceWorker' in navigator) {
                     navigator.serviceWorker.ready.then(function(registration) {
                         registration.showNotification('Bewertung erfolgreich!', {
-                            body: 'Vielen Dank für deine ' + rating + ' Sterne!',
+                            body: 'Vielen Dank für deine ' + currentRating + ' Sterne!',
                             icon: 'img/homescreen192.png',
                             badge: 'img/homescreen192.png',
                             vibrate: [100, 50, 100],
-                            tag: 'feedback-confirm' // Verhindert doppelte Nachrichten
+                            tag: 'feedback-notification'
                         });
+                        btn.text("Gesendet!");
+                    }).catch(function(err) {
+                        console.error("Service Worker Error:", err);
+                        alert("Fehler beim Senden der Benachrichtigung.");
+                        btn.text("Abschicken").prop('disabled', false);
                     });
+                } else {
+                    alert("Service Worker nicht unterstützt.");
+                    btn.text("Abschicken").prop('disabled', false);
                 }
-            }
-
-            $('#submitBtn').on('click', function(e) {
-                e.preventDefault();
-                sendFeedbackNotification(currentRating);
-                $(this).text("Gesendet!").prop('disabled', true);
             });
         });
     </script>
