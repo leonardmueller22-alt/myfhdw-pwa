@@ -85,10 +85,10 @@
     </div>
 
     <script>
-        // Wir nutzen Standard JS Event Listener für maximale Kompatibilität wie im Meflo-Beispiel
+        // Meflo-Stil: Standard JS Event Listener
         document.addEventListener("DOMContentLoaded", function() {
             
-            // Service Worker Check
+            // Service Worker Check & Registrierung
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('sw.js');
             }
@@ -112,30 +112,35 @@
                 });
             });
 
-            // DIE NEUE LOGIK (async/await wie bei Meflo)
-            button.addEventListener("click", async () => {
-                
-                // 1. Optisches Feedback sofort geben
+            // NEUER KLICK-HANDLER: Nachricht an Service Worker schicken
+            button.addEventListener("click", () => {
+                // 1. Sofort Feedback geben
                 button.textContent = "Gesendet!";
                 button.disabled = true;
 
-                // 2. Benachrichtigung senden
+                // 2. An den Service Worker delegieren
                 if ("serviceWorker" in navigator && Notification.permission === "granted") {
-                    try {
-                        // WARTEN bis der Service Worker bereit ist (das ist der Trick!)
-                        const reg = await navigator.serviceWorker.ready;
-                        
-                        // Nachricht anzeigen
-                        reg.showNotification("Bewertung erfolgreich!", {
-                            body: "Vielen Dank für deine " + currentRating + " Sterne!",
-                            icon: "img/homescreen192.png",
-                            vibrate: [100, 50, 100]
+                    
+                    // Wir bauen die Nachricht
+                    const msg = {
+                        type: 'SEND_NOTIFICATION',
+                        title: 'Bewertung erfolgreich!',
+                        body: 'Vielen Dank für deine ' + currentRating + ' Sterne!'
+                    };
+
+                    // Versuch 1: Über den Controller (wenn Seite schon kontrolliert wird)
+                    if (navigator.serviceWorker.controller) {
+                        navigator.serviceWorker.controller.postMessage(msg);
+                    } 
+                    // Versuch 2: Falls Controller null (z.B. nach Hard-Refresh), warte auf Ready
+                    else {
+                        navigator.serviceWorker.ready.then(function(reg) {
+                            if (reg.active) {
+                                reg.active.postMessage(msg);
+                            }
                         });
-                    } catch (err) {
-                        console.error("Fehler beim Senden:", err);
                     }
                 } else if (Notification.permission !== "denied") {
-                    // Falls noch keine Rechte da sind, fragen
                     Notification.requestPermission();
                 }
             });
