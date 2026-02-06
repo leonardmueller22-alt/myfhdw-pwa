@@ -1,4 +1,4 @@
-const CACHE_NAME = 'myfhdw-pwa-v88'; // Version auf v88 erhöht
+const CACHE_NAME = 'myfhdw-pwa-v89'; // Version v89
 
 const urlsToCache = [
   './',
@@ -68,7 +68,7 @@ self.addEventListener('fetch', function(event) {
   );
 });
 
-// Listener für Push-Events (Server)
+// Listener für Push-Events vom Server (beibehalten, stört nicht)
 self.addEventListener('push', function(event) {
   let data = { title: 'MyFHDW', body: 'Neue Nachricht!' };
   if (event.data) {
@@ -85,20 +85,6 @@ self.addEventListener('push', function(event) {
     vibrate: [100, 50, 100]
   };
   event.waitUntil(self.registration.showNotification(data.title, options));
-});
-
-// NEU: Message Listener (Empfängt Befehle von der Webseite/abgaben.html)
-self.addEventListener('message', function(event) {
-  if (event.data && event.data.type === 'SEND_NOTIFICATION') {
-    const options = {
-      body: event.data.body,
-      icon: 'img/homescreen192.png',
-      badge: 'img/homescreen192.png',
-      vibrate: [100, 50, 100]
-    };
-    // Der Service Worker selbst zeigt die Nachricht an
-    self.registration.showNotification(event.data.title, options);
-  }
 });
 
 self.addEventListener('notificationclick', function(event) {
