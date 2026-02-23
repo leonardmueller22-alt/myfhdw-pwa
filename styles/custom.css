@@ -9,7 +9,7 @@ a {
 .btn-link {
     color: #21376a;
 }
-/* REPARIERT: Hover-Effekt in Orange */
+
 .btn-link:hover, .btn-link:focus {
     color: #f39200;
 }
