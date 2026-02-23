@@ -7,25 +7,19 @@
     <meta name="robots" content="NOINDEX, NOFOLLOW"/>
     <title>Stundenplan</title>
 
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#21376a">
-    <link rel="apple-touch-icon" href="img/homescreen192.png">
+    <link rel="apple-touch-icon" href="./img/homescreen192.png">
 
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/autocomplete.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/autosuggest.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/style.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/vorlage.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/fontawesome/css/all.min.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.custom.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/buttons.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/content.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/css.css" type="text/css"/>
-    
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/SharedResources/dhtmlxscheduler/codebase/dhtmlxscheduler_material.css" type="text/css"/>
+    <!-- ✅ REPARIERT: Keine CloudFront-Assets mehr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="styles/custom.css" type="text/css" media="all"/>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <!-- ✅ DHTMLX Scheduler (statt CloudFront) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dhtmlx-scheduler@6.0.5/codebase/dhtmlxscheduler_material.css" type="text/css"/>
+
+    <link rel="stylesheet" href="./styles/custom.css" type="text/css" media="all"/>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
 
     <style>
         /* Kalender Anpassungen */
@@ -35,7 +29,7 @@
             border: 1px solid #cecece;
             font-family: Arial, Helvetica, sans-serif;
         }
-        
+
         /* Event Styling */
         .dhx_cal_event div {
             background-color: #378298 !important;
@@ -75,19 +69,22 @@
         }
     </style>
 
-    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/js/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/SharedResources/dhtmlxscheduler/codebase/dhtmlxscheduler.js"></script>
-    <script src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/SharedResources/dhtmlxscheduler/codebase/locale/locale_de.js"></script>
-    <script src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/SharedResources/dhtmlxscheduler/codebase/ext/dhtmlxscheduler_year_view.js"></script>
+    <!-- ✅ REPARIERT: öffentlich erreichbares jQuery + Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+
+    <!-- ✅ DHTMLX Scheduler (statt CloudFront) -->
+    <script src="https://cdn.jsdelivr.net/npm/dhtmlx-scheduler@6.0.5/codebase/dhtmlxscheduler.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dhtmlx-scheduler@6.0.5/codebase/locale/locale_de.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dhtmlx-scheduler@6.0.5/codebase/ext/dhtmlxscheduler_year_view.js"></script>
 </head>
 
 <body id="community-facelift">
     <div id="container-spacer">
         <div class="community-facelift header-logo-box">
             <div class="container" style="overflow: hidden;">
-                <a title="Home" href="dashboard.html">
-                    <img src="img/Community_Banner.jpg" class="img-responsive" alt="page logo"/>
+                <a title="Home" href="./dashboard.html">
+                    <img src="./img/Community_Banner.jpg" class="img-responsive" alt="page logo"/>
                 </a>
             </div>
         </div>
@@ -101,19 +98,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="dashboard.html" class="navbar-brand">
+                    <a href="./dashboard.html" class="navbar-brand">
                         <span class="glyphicon glyphicon-home"></span>
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-id-5ddff3db0f75d">
                     <ul class="nav navbar-nav">
-                        <li><a href="profile.html">Mein Profil</a></li>
-                        <li class="active"><a href="timetable.html">Stundenplan</a></li>
-                        <li><a href="pruefungstermine.html">Prüfungstermine</a></li>
-                        <li><a href="notenuebersicht.html">Notenübersicht</a></li>
-                        <li><a href="dokumente.html">Dokumente</a></li>
-                        <li><a href="abgaben.html">Abgaben</a></li>
-                        <li><a href="kurzbewerbung.html">Kurzbewerbung Master-Studium</a></li>
+                        <li><a href="./profile.html">Mein Profil</a></li>
+                        <li class="active"><a href="./timetable.html">Stundenplan</a></li>
+                        <li><a href="./pruefungstermine.html">Prüfungstermine</a></li>
+                        <li><a href="./notenuebersicht.html">Notenübersicht</a></li>
+                        <li><a href="./dokumente.html">Dokumente</a></li>
+                        <li><a href="./abgaben.html">Abgaben</a></li>
+                        <li><a href="./kurzbewerbung.html">Kurzbewerbung Master-Studium</a></li>
                     </ul>
                 </div>
             </div>
@@ -124,7 +121,7 @@
                 <div style="display: block;">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle dropdown-slim" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="far fa-user"></span> Mehmet Güngörmez <span class="caret"></span>
+                            <span class="fa fa-user"></span> Mehmet Güngörmez <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
                             <li role="presentation">
@@ -134,26 +131,25 @@
                             </li>
                             <li role="separator" class="divider"></li>
                             <li role="presentation">
-                                <a role="menuitem" href="index.html">
-                                    <span class="far fa-power-off"></span> Ausloggen
+                                <a role="menuitem" href="./index.html">
+                                    <span class="fa fa-power-off"></span> Ausloggen
                                 </a>
                             </li>
                         </ul>
                     </div>
-                    
+
                     <div class="btn-group" style="margin-left: 10px;">
                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img alt="Deutsch" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/system/img/flags/de.png" style="position: relative; top: -2px;">
                              Deutsch <span class="caret"></span>
                         </button>
                     </div>
                 </div>
             </div>
-            
+
             <div class="pull-left">
                 <div class="community-facelift btn-group btn-breadcrumb">
-                    <a class="btn btn-default" href="dashboard.html">Startseite</a>
-                    <a class="btn btn-default" href="timetable.html">Stundenplan (Studierende)</a>
+                    <a class="btn btn-default" href="./dashboard.html">Startseite</a>
+                    <a class="btn btn-default" href="./timetable.html">Stundenplan (Studierende)</a>
                 </div>
             </div>
         </div>
@@ -168,7 +164,7 @@
                 <div class="row">
                     <div class="form-group col-md-3" style="margin-bottom: 0;">
                         <button type="button" class="btn btn-default btn-block" style="background: white; color: #333; margin-top: 5px;">
-                            <i class="far fa-download"></i> iCal-Export
+                            <i class="fa fa-download"></i> iCal-Export
                         </button>
                     </div>
                 </div>
@@ -202,14 +198,14 @@
                 <div class="calendar">
                     <div class="scheduler" style="height: auto">
                         <div id="scheduler_here" class="dhx_cal_container" style="width:100%; height:780px;">
-                            <div class="dhx_cal_navline"></div> 
+                            <div class="dhx_cal_navline"></div>
                             <div class="dhx_cal_header"></div>
                             <div class="dhx_cal_data"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div style="height: 50px;"></div>
         </div>
     </div>
@@ -227,7 +223,7 @@
             </div>
         </div>
     </footer>
-    
+
     <footer class="community-facelift footer-bootstrap-academyFive footer-meta">
         <div class="container">
             <div class="row">
@@ -243,7 +239,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                navigator.serviceWorker.register('sw.js');
+                navigator.serviceWorker.register('./sw.js');
             });
         }
     </script>
@@ -261,7 +257,7 @@
         scheduler.config.start_on_monday = true;
         scheduler.config.readonly = true;
         scheduler.config.show_loading = true;
-        
+
         scheduler.init('scheduler_here', new Date(), "week");
 
         function updateHeader() {
@@ -269,7 +265,7 @@
             var mode = state.mode;
             var date = state.date;
             var text = "";
-            
+
             var dayFormat = scheduler.date.date_to_str("%d. %F %Y");
             var monthFormat = scheduler.date.date_to_str("%F %Y");
             var yearFormat = scheduler.date.date_to_str("%Y");
@@ -296,18 +292,17 @@
         scheduler.attachEvent("onViewChange", function (new_mode, new_date){
             updateHeader();
         });
-        
+
         window.setView = function(mode, btn) {
             scheduler.setCurrentView(scheduler.getState().date, mode);
             var btns = document.querySelectorAll(".btn-group .btn");
-            btns.forEach(b => b.classList.remove("active"));
+            btns.forEach(function(b){ b.classList.remove("active"); });
             btn.classList.add("active");
         };
 
         updateHeader();
 
         // DATEN (24. Feb 2026, OHNE Speth)
-        var currentYear = 2026; 
         var dateStart = "2026-02-24 09:45";
         var dateEnd = "2026-02-24 13:00";
 
@@ -316,17 +311,15 @@
                 id: 1,
                 start_date: dateStart,
                 end_date: dateEnd,
-                text: `
-                    <span class="ev-type">Vorlesung</span>
-                    <span class="ev-title">Web Technologies and Applications</span>
-                    <span class="ev-room">B-D04</span>
-                    <span class="ev-code">BFWC423A</span>
-                `
+                text: "\
+                    <span class='ev-type'>Vorlesung</span>\
+                    <span class='ev-title'>Web Technologies and Applications</span>\
+                    <span class='ev-room'>B-D04</span>\
+                    <span class='ev-code'>BFWC423A</span>\
+                "
             }
-            
         ];
-        
-        // HIER WAR DER FEHLER: "ar" statt "var". Ich habe es korrigiert.
+
         var inactivityTime = function () {
             var time;
             window.onload = resetTimer;
@@ -335,15 +328,12 @@
             document.onclick = resetTimer;
 
             function logout() {
-                // Optional: alert entfernen, wenn es nervt
-                // alert("Du wurdest automatisch ausgeloggt."); 
                 window.location.href = 'index.html';
             }
 
             function resetTimer() {
                 clearTimeout(time);
-                // 60000 = 1 Minute (Vorher war es 300000 = 5 Minuten)
-                time = setTimeout(logout, 180000); 
+                time = setTimeout(logout, 180000);
             }
         };
         inactivityTime();
