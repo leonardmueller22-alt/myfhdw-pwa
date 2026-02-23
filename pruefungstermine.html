@@ -7,23 +7,19 @@
     <meta name="robots" content="NOINDEX, NOFOLLOW"/>
     <title>Prüfungstermine</title>
 
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#21376a">
-    <link rel="apple-touch-icon" href="img/homescreen192.png">
+    <link rel="apple-touch-icon" href="./img/homescreen192.png">
 
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/style.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/vorlage.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/fontawesome/css/all.min.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.custom.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/buttons.css" type="text/css"/>
-    <link rel="stylesheet" href="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/content.css" type="text/css"/>
-    
-    <link rel="stylesheet" href="styles/custom.css" type="text/css" media="all"/>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <!-- ✅ Layout-Fix: stabile CDN-Versionen statt CloudFront -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="./styles/custom.css" type="text/css" media="all"/>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
 
     <style>
-        /* Navbar Fixes (aus Notenübersicht übernommen) */
+        /* Navbar Fixes */
         .navbar-nav > li > a { line-height: 20px !important; }
         .navbar { min-height: 50px !important; border: 1px solid transparent; margin-bottom: 20px; }
 
@@ -43,7 +39,7 @@
             width: 100%;
             background-color: #fff;
             border: 1px solid #ddd;
-            margin-bottom: 10px; /* HIER IST DIE "MINIMALE LUFT" */
+            margin-bottom: 10px;
             font-size: 13px;
             border-collapse: collapse;
         }
@@ -67,7 +63,7 @@
             color: #333;
         }
 
-        /* Spaltenbreiten (Fest, damit alles untereinander steht) */
+        /* Spaltenbreiten */
         .w-col1 { width: 25%; }
         .w-col2 { width: 13%; }
         .w-col3 { width: 12%; }
@@ -79,21 +75,30 @@
         /* Text Styles */
         .exam-date-bold { font-weight: bold; color: #000; display: block; margin-bottom: 4px; }
         .exam-title-blue { color: #21376a; font-size: 13px; display: block; }
-        
+
         /* Info Box */
-        .alert-info { background-color: #d9edf7; border-color: #bce8f1; color: #31708f; padding: 15px; margin-bottom: 20px; font-size: 13px; font-weight: bold;}
+        .alert-info {
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+            color: #31708f;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
     </style>
 
-    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/js/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap.min.js"></script>
+    <!-- ✅ Layout-Fix: stabile CDN-Versionen statt CloudFront -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body id="community-facelift">
     <div id="container-spacer">
         <div class="community-facelift header-logo-box">
             <div class="container" style="overflow: hidden;">
-                <a title="Home" href="dashboard.html">
-                    <img src="img/Community_Banner.jpg" class="img-responsive" alt="page logo"/>
+                <a title="Home" href="./dashboard.html">
+                    <img src="./img/Community_Banner.jpg" class="img-responsive" alt="page logo"/>
                 </a>
             </div>
         </div>
@@ -107,19 +112,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="dashboard.html" class="navbar-brand">
+                    <a href="./dashboard.html" class="navbar-brand">
                         <span class="glyphicon glyphicon-home"></span>
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-id">
                     <ul class="nav navbar-nav">
-                        <li><a href="profile.html">Mein Profil</a></li>
-                        <li><a href="timetable.html">Stundenplan</a></li>
-                        <li class="active"><a href="pruefungstermine.html">Prüfungstermine</a></li>
-                        <li><a href="notenuebersicht.html">Notenübersicht</a></li>
-                        <li><a href="dokumente.html">Dokumente</a></li>
-                        <li><a href="abgaben.html">Abgaben</a></li>
-                        <li><a href="kurzbewerbung.html">Kurzbewerbung Master-Studium</a></li>
+                        <li><a href="./profile.html">Mein Profil</a></li>
+                        <li><a href="./timetable.html">Stundenplan</a></li>
+                        <li class="active"><a href="./pruefungstermine.html">Prüfungstermine</a></li>
+                        <li><a href="./notenuebersicht.html">Notenübersicht</a></li>
+                        <li><a href="./dokumente.html">Dokumente</a></li>
+                        <li><a href="./abgaben.html">Abgaben</a></li>
+                        <li><a href="./kurzbewerbung.html">Kurzbewerbung Master-Studium</a></li>
                     </ul>
                 </div>
             </div>
@@ -129,17 +134,17 @@
             <div class="pull-right">
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle dropdown-slim" data-toggle="dropdown">
-                        <span class="far fa-user"></span> Mehmet Güngörmez <span class="caret"></span>
+                        <span class="fa fa-user"></span> Mehmet Güngörmez <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="index.html"><span class="far fa-power-off"></span> Ausloggen</a></li>
+                        <li><a href="./index.html"><span class="fa fa-power-off"></span> Ausloggen</a></li>
                     </ul>
                 </div>
             </div>
             <div class="pull-left">
                 <div class="community-facelift btn-group btn-breadcrumb">
-                    <a class="btn btn-default" href="dashboard.html">Startseite</a>
-                    <a class="btn btn-default" href="pruefungstermine.html">Prüfungstermine</a>
+                    <a class="btn btn-default" href="./dashboard.html">Startseite</a>
+                    <a class="btn btn-default" href="./pruefungstermine.html">Prüfungstermine</a>
                 </div>
             </div>
         </div>
@@ -327,7 +332,7 @@
             </div>
         </div>
     </footer>
-    
+
     <footer class="community-facelift footer-bootstrap-academyFive footer-meta">
         <div class="container">
             <div class="row">
@@ -337,28 +342,32 @@
     </footer>
 
     <script>
+        // Service Worker + Auto Logout (wie vorher, nur Pfade stabil gemacht)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                navigator.serviceWorker.register('sw.js');
+                navigator.serviceWorker.register('./sw.js');
             });
-            var inactivityTime = function () {
+        }
+
+        // Auto Logout
+        var inactivityTime = function () {
             var time;
             window.onload = resetTimer;
             document.onmousemove = resetTimer;
             document.onkeypress = resetTimer;
             document.onclick = resetTimer;
+            document.ontouchstart = resetTimer;
 
             function logout() {
-                window.location.href = 'index.html';
+                window.location.href = './index.html';
             }
 
             function resetTimer() {
                 clearTimeout(time);
-                time = setTimeout(logout, 180000); 
+                time = setTimeout(logout, 180000);
             }
         };
         inactivityTime();
-        }
     </script>
 </body>
 </html>
