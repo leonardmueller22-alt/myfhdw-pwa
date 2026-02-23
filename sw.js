@@ -1,4 +1,4 @@
-const CACHE_NAME = 'myfhdw-pwa-v89'; // Version v89
+const CACHE_NAME = 'myfhdw-pwa-v90';
 
 const urlsToCache = [
   './',
@@ -19,57 +19,56 @@ const urlsToCache = [
   './img/gorilla.jpg',
   './favicon.ico',
   './files/handout.pdf',
-  './files/praesentation.pptx',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/js/jquery/js/jquery-2.2.4.min.js',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/js/bootstrap.min.js',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.min.css',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/bootstrap/css/bootstrap.custom.css',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/jscripts/fontawesome/css/all.min.css',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/style.css',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/vorlage.css',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/buttons.css',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/content.css',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/styles/css.css',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/SharedResources/dhtmlxscheduler/codebase/dhtmlxscheduler_material.css',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/SharedResources/dhtmlxscheduler/codebase/dhtmlxscheduler.js',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/SharedResources/dhtmlxscheduler/codebase/locale/locale_de.js',
-  'https://d2q8mlawr49whx.cloudfront.net/V18.05.5/SharedResources/dhtmlxscheduler/codebase/ext/dhtmlxscheduler_year_view.js'
+  './files/praesentation.pptx'
 ];
 
-self.addEventListener('install', function(event) {
-  self.skipWaiting(); 
+self.addEventListener('install', function (event) {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
+    caches.open(CACHE_NAME).then(function (cache) {
       return cache.addAll(urlsToCache);
     })
   );
 });
 
-self.addEventListener('activate', function(event) {
+self.addEventListener('activate', function (event) {
   event.waitUntil(
-    caches.keys().then(function(cacheNames) {
+    caches.keys().then(function (cacheNames) {
       return Promise.all(
-        cacheNames.map(function(cacheName) {
+        cacheNames.map(function (cacheName) {
           if (cacheName !== CACHE_NAME) {
             return caches.delete(cacheName);
           }
         })
       );
+    }).then(function () {
+      return self.clients.claim();
     })
   );
-  return self.clients.claim();
 });
 
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', function (event) {
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    caches.match(event.request).then(function(response) {
-      return response || fetch(event.request);
+    caches.match(event.request).then(function (cached) {
+      if (cached) return cached;
+
+      return fetch(event.request).then(function (response) {
+        return response;
+      }).catch(function () {
+        // Offline fallback: wenn Navigation (Seitenaufruf), zurück zur Startseite
+        if (event.request.mode === 'navigate') {
+          return caches.match('./index.html');
+        }
+        return cached;
+      });
     })
   );
 });
 
-// Listener für Push-Events vom Server (beibehalten, stört nicht)
-self.addEventListener('push', function(event) {
+// Push-Events (beibehalten)
+self.addEventListener('push', function (event) {
   let data = { title: 'MyFHDW', body: 'Neue Nachricht!' };
   if (event.data) {
     try {
@@ -80,13 +79,13 @@ self.addEventListener('push', function(event) {
   }
   const options = {
     body: data.body,
-    icon: 'img/homescreen192.png',
-    badge: 'img/homescreen192.png',
+    icon: './img/homescreen192.png',
+    badge: './img/homescreen192.png',
     vibrate: [100, 50, 100]
   };
   event.waitUntil(self.registration.showNotification(data.title, options));
 });
 
-self.addEventListener('notificationclick', function(event) {
+self.addEventListener('notificationclick', function (event) {
   event.notification.close();
 });
