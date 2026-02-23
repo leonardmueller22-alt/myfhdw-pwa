@@ -67,7 +67,7 @@ self.addEventListener('fetch', function (event) {
   );
 });
 
-// Push-Events (beibehalten)
+// Push-Events 
 self.addEventListener('push', function (event) {
   let data = { title: 'MyFHDW', body: 'Neue Nachricht!' };
   if (event.data) {
