@@ -1,4 +1,4 @@
-const CACHE_NAME = 'myfhdw-pwa-v92';
+const CACHE_NAME = 'myfhdw-pwa-v93';
 
 const urlsToCache = [
   './',
