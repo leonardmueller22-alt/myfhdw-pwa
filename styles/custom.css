@@ -2,7 +2,7 @@
     background-color: #ffffff;
 }
 
-/* REPARIERT: Standard-Links in FHDW-Blau */
+/* FHDW-Blau */
 a {
     color: #21376a;
 }
@@ -18,7 +18,6 @@ h1, h2, h3, h4, h5, h6 {
     color: #21376a;
 }
 
-/* REPARIERT: Text auf orangem Hintergrund muss Weiß sein */
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
@@ -33,7 +32,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*Navbar settings*/
-/*Normal*/
 .navbar,
 .navbar-default .navbar-nav > li > a {
     background-color: #21376a;
@@ -76,14 +74,14 @@ body {
     border-bottom-color: #21376a !important;
 }
 
-/* REPARIERT: Textfarbe Weiß hinzugefügt */
+
 .simo-media-hover .media-body.selected-mail, .simo-media-hover .media-left.selected-mail {
     background-color: #f39200 !important;
     border-color: #f39200 !important;
     color: #ffffff !important;
 }
 
-/* REPARIERT: Textfarbe Weiß hinzugefügt */
+
 .simo-new-mail-button {
     background-color: #f39200 !important;
     border-color: #f39200 !important;
