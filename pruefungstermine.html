@@ -11,7 +11,7 @@
     <meta name="theme-color" content="#21376a">
     <link rel="apple-touch-icon" href="./img/homescreen192.png">
 
-    <!-- ✅ Layout-Fix: stabile CDN-Versionen statt CloudFront -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
 
@@ -19,11 +19,11 @@
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
 
     <style>
-        /* Navbar Fixes */
+        
         .navbar-nav > li > a { line-height: 20px !important; }
         .navbar { min-height: 50px !important; border: 1px solid transparent; margin-bottom: 20px; }
 
-        /* Button "Angemeldete Prüfungen" */
+        
         .btn-tab-wrapper { text-align: right; margin-bottom: -1px; position: relative; z-index: 10; }
         .btn-fake-tab {
             display: inline-block; padding: 6px 12px; margin-bottom: 0;
@@ -88,7 +88,7 @@
         }
     </style>
 
-    <!-- ✅ Layout-Fix: stabile CDN-Versionen statt CloudFront -->
+    
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
 </head>
@@ -342,7 +342,7 @@
     </footer>
 
     <script>
-        // Service Worker + Auto Logout (wie vorher, nur Pfade stabil gemacht)
+        
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('./sw.js');
